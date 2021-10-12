@@ -97,7 +97,7 @@
                   class="error"
                   *ngIf="getControl.firstName.errors?.minlength"
                 >
-                  Minimum 4 characters are required for first name.
+                  Minimum 3 characters are required for first name.
                 </small>
               </div>
             </div>
@@ -140,11 +140,12 @@
                   class="error"
                   *ngIf="getControl.lastName.errors?.minlength"
                 >
-                  Minimum 4 character are required.
+                  Minimum 3 character are required.
                 </small>
               </div>
             </div>
           </div>
+
           <div class="p-fluid p-grid">
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
               <span class="p-float-label">
@@ -167,14 +168,37 @@
               </p-calendar>
             </div>
             <div class="p-field p-col-12 p-md-4">
+              <span class="p-float-label">
               <input
+                id="pob"
                 type="text"
-                formControlName="POB"
                 pInputText
-                placeholder="Place Of Birth"
+                formControlName="POB"
               />
+              <label for="pob">Place of Birth</label>
+              </span>
+              <div
+                *ngIf="
+                  getControl.POB.touched && getControl.POB.invalid
+                "
+                class="text-danger"
+              >
+                <small
+                  class="error"
+                  *ngIf="getControl.POB.errors?.required"
+                >
+                Please enter a valid place of birth.           
+                   </small>
+                <small
+                  class="error"
+                  *ngIf="getControl.POB.errors?.minlength"
+                >
+                Minimum 3 characters are required for place of birth.
+                </small>
+              </div>
             </div>
           </div>
+
           <div class="p-fluid p-grid">
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
               <span class="p-float-label">
@@ -201,12 +225,13 @@
                 </small>
                 <small
                   class="error"
-                  *ngIf="getControl.SSNNumber.errors?.required"
+                  *ngIf="getControl.SSNNumber.errors?.minlength"
                 >
                   SSN # seems invalid.
                 </small>
               </div>
             </div>
+
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
               <span class="p-float-label">
                 <input
@@ -238,37 +263,51 @@
                 </small>
               </div>
             </div>
-          </div>
-          <div class="p-fluid p-formgrid p-grid">
+
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
-              <span class="title">Gender</span>
-              <div *ngFor="let category of genders" class="p-field-checkbox">
-                <p-radioButton
-                  [inputId]="category.key"
-                  name="category"
-                  value="category"
-                  formControlName="selectedGender"
-                  [disabled]="category.key === 'R'"
-                ></p-radioButton>
-                <label [for]="category.key">{{ category.name }}</label>
-              </div>
+              <span class="p-float-label">
+                <p-dropdown
+                  inputId="gender"
+                  [autoDisplayFirst]="false"
+                  [options]="genders"
+                  formControlName="selectedGenders"
+                  optionLabel="name"
+                >
+                </p-dropdown>
+                <label for="gender">Select Gender</label>
+              </span>
             </div>
-            <div id="fields_margin" class="p-field p-col-12 p-md-4">
-              <span class="title">Martial Status</span>
+            <ng-template pTemplate="selectedItem">
               <div
-                *ngFor="let category of martialStatuses"
-                class="p-field-checkbox"
+                class="country-item country-item-value"
+                *ngIf="selectedGender"
               >
-                <p-radioButton
-                  [inputId]="category.key"
-                  name="selectedMartialStatus"
-                  [value]="category"
-                  formControlName="selectedMartialStatus"
-                  [disabled]="category.key === 'R'"
-                ></p-radioButton>
-                <label [for]="category.key">{{ category.name }}</label>
+                <div>{{ selectedGender.name }}</div>
               </div>
+            </ng-template>
+          </div>
+          <div class="p-fluid p-grid">
+            <div id="fields_margin" class="p-field p-col-12 p-md-4">
+              <span class="p-float-label">
+                <p-dropdown
+                  inputId="maritalStatus"
+                  [autoDisplayFirst]="false"
+                  [options]="maritalStatus"
+                  formControlName="selectedMaritalStatus"
+                  optionLabel="name"
+                >
+                </p-dropdown>
+                <label for="maritalStatus">Select Marital Status</label>
+              </span>
             </div>
+            <ng-template pTemplate="selectedItem">
+              <div
+                class="country-item country-item-value"
+                *ngIf="selectedMaritalStatus"
+              >
+                <div>{{ selectedMaritalStatus.name }}</div>
+              </div>
+            </ng-template>
           </div>
         </fieldset>
         <!-- Person Info End -->
@@ -283,12 +322,11 @@
               <span class="p-float-label">
                 <input
                   id="Email Id"
-                  type="email"
+                  type="text"
                   formControlName="emailId"
                   class="form-control"
                   pInputText
-                  mask="SA*@A*.SSS"
-                  [showMaskTyped]="true"
+                  mask="SA*@SS*.SS||SA*@SS*.SSS"
                 />
                 <label for="Email Id">Email Id</label>
               </span>
@@ -339,7 +377,7 @@
                 type="text"
                 pInputText
                 formControlName="SSNNumber"
-                mask ="000-000"
+                mask ="000-00-0000"
               />
               <label for="SSN #">SSN #</label>
             </span>
@@ -436,39 +474,45 @@
           </legend>
           <div class="p-fluid p-grid">
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
-              <input
-                type="text"
-                pInputText
-                formControlName="address1"
-                placeholder="Address 1"
-              />
+              <span class="p-float-label">
+                <input
+                  id="address1"
+                  type="text"
+                  pInputText
+                  formControlName="address1"
+                />
+                <label for="address1">Address1</label>
+              </span>
               <div
                 *ngIf="
-                  getControl.lastName.touched && getControl.lastName.invalid
+                  getControl.address1.touched && getControl.address1.invalid
                 "
                 class="text-danger"
               >
                 <small
                   class="error"
-                  *ngIf="getControl.lastName.errors?.required"
+                  *ngIf="getControl.address1.errors?.required"
                 >
                   Address 1 is required.
                 </small>
                 <small
                   class="error"
-                  *ngIf="getControl.lastName.errors?.minlength"
+                  *ngIf="getControl.address1.errors?.minlength"
                 >
                   Minimum 4 character are required.
                 </small>
               </div>
             </div>
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
-              <input
-                type="text"
-                pInputText
-                formControlName="city"
-                placeholder="City"
-              />
+              <span class="p-float-label">
+                <input
+                  id="city"
+                  type="text"
+                  pInputText
+                  formControlName="city"
+                />
+                <label for="city">City</label>
+              </span>
               <div
                 *ngIf="getControl.city.touched && getControl.city.invalid"
                 class="text-danger"
@@ -552,16 +596,18 @@
               />
             </div>
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
-              <input
-                type="text"
-                pInputText
-                formControlName="zipCode"
-                placeholder="Zip Code"
-              />
+              <span class="p-float-label">
+                <input
+                  id="zip"
+                  type="text"
+                  pInputText
+                  formControlName="zipCode"
+                  mask="00000-0000||00000"
+                />
+                <label for="zip">Zip</label>
+              </span>
               <div
-                *ngIf="
-                  getControl.zipCode.touched && getControl.lastName.invalid
-                "
+                *ngIf="getControl.zipCode.touched && getControl.zipCode.invalid"
                 class="text-danger"
               >
                 <small
@@ -574,7 +620,7 @@
                   class="error"
                   *ngIf="getControl.zipCode.errors?.minlength"
                 >
-                  Minimum 4 character are required.
+                  Minimum 5 digits are required.
                 </small>
               </div>
             </div>
@@ -599,68 +645,29 @@
                 <label for="hobbies">Hobbies</label>
               </span>
             </div>
-            <div id="fields_margin" class="p-field p-col-12 p-md-4">
-             
-                <input
-                  id="primaryLanguage"
-                  type="text"
-                  pInputText
-                  formControlName="primaryLanguage"
-                />
-                </div>
 
-               
-                <!-- <p-dropdown
+
+           
+            <div id="fields_margin" class="p-field p-col-12 p-md-4">
+              <span class="p-float-label">
+                <p-dropdown
                   inputId="primaryLanguage"
                   [autoDisplayFirst]="false"
                   [options]="languages"
-                  formControlName="selectedLanguage"
+                  formControlName="selectedprimaryLanguage"
                   optionLabel="name"
                 >
                 </p-dropdown>
-
-                <label for="primaryLanguage">Primary Language</label>
+                <label for="primaryLanguage"
+                  >Primary Language</label
+                >
               </span>
-
             </div>
-            <ng-template pTemplate="selectedItem">
-              <div
-                class="country-item country-item-value"
-                *ngIf="selectedLanguage"
-              >
-                <div>{{ selectedLanguage.name }}</div>
-              </div>
-            </ng-template> -->
+
             
-              <!-- <div
-                *ngIf="
-                  getControl.primaryLanguage.touched &&
-                  getControl.primaryLanguage.invalid
-                "
-                class="text-danger"
-              >
-                <small
-                  class="error"
-                  *ngIf="getControl.primaryLanguage.errors?.required"
-                >
-                  Please enter a valid primary language.
-                </small>
-                <small
-                  class="error"
-                  *ngIf="getControl.primaryLanguage.errors?.minlength"
-                >
-                  Minimum 4 character are required.
-                </small>
-              </div> -->
-            
+
 
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
-              <!-- <input
-                type="text"
-                pInputText
-                formControlName="relegiousPreferences"
-                placeholder="Religious Preferences"
-              /> -->
               <span class="p-float-label">
                 <p-dropdown
                   inputId="Select RelegiousPreference"
@@ -675,36 +682,22 @@
                 >
               </span>
             </div>
-            </div>
-            <div
-              *ngIf="
-                getControl.primaryLanguage.touched &&
-                getControl.primaryLanguage.invalid
-              "
-              class="text-danger"
-            >
-              <small
-                class="error"
-                *ngIf="getControl.primaryLanguage.errors?.required"
-              >
-                Please enter a valid primary language.
-              </small>
-              <small
-                class="error"
-                *ngIf="getControl.primaryLanguage.errors?.minlength"
-              >
-                Minimum 4 character are required.
-              </small>
-            </div>
-          
+          </div>
+         
+
           <div class="p-fluid p-grid">
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
-              <input
-                type="text"
-                pInputText
-                formControlName="race"
-                placeholder="Race"
-              />
+              <span class="p-float-label">
+              <p-dropdown
+                  inputId="race"
+                  [autoDisplayFirst]="false"
+                  [options]="races"
+                  formControlName="selectedRace"
+                  optionLabel="name"
+                >
+                </p-dropdown>
+              <label for="race">Race</label>
+              </span> 
             </div>
           </div>
         </fieldset>
@@ -717,40 +710,129 @@
           </legend>
           <div class="p-fluid p-grid">
             <div class="p-field p-col-12 p-md-4">
-              <input
-                type="text"
-                pInputText
-                formControlName="cfirstName"
-                placeholder="First Name"
-              />
+              <span class="p-float-label">
+                <input
+                  id="cFirstName"
+                  type="text"
+                  pInputText
+                  formControlName="cfirstName"
+                />
+                <label for="cFirstName">First Name</label>
+              </span>
+              <div
+                *ngIf="
+                  getControl.cfirstName.touched && getControl.cfirstName.invalid
+                "
+                class="text-danger"
+              >
+                <small
+                  class="error"
+                  *ngIf="getControl.cfirstName.errors?.required"
+                >
+                  Please enter a valid first name.
+                </small>
+                <small
+                  class="error"
+                  *ngIf="getControl.cfirstName.errors?.minlength"
+                >
+                  Minimum 4 characters are required for first name.
+                </small>
+              </div>
             </div>
             <div class="p-field p-col-12 p-md-4">
-              <input
-                type="text"
-                value="{{ veteran?.cmiddleName }}"
-                pInputText
-                formControlName="cmiddleName"
-                placeholder="Middle Name"
-              />
+              <span class="p-float-label">
+                <input
+                  id="middleName"
+                  type="text"
+                  pInputText
+                  formControlName="cmiddleName"
+                />
+                <label for="middleName">Middle Name</label>
+              </span>
+
+              <div
+                *ngIf="
+                  getControl.cmiddleName.touched &&
+                  getControl.cmiddleName.invalid
+                "
+                class="text-danger"
+              >
+                <small
+                  class="error"
+                  *ngIf="getControl.cmiddleName.errors?.required"
+                >
+                  Please enter a valid middle name.
+                </small>
+                <small
+                  class="error"
+                  *ngIf="getControl.cmiddleName.errors?.minlength"
+                >
+                  Minimum 4 characters are required for first name.
+                </small>
+              </div>
             </div>
+
             <div class="p-field p-col-12 p-md-4">
-              <input
-                type="text"
-                value="{{ veteran?.clastName }}"
-                pInputText
-                formControlName="clastName"
-                placeholder="Last Name"
-              />
+              <span class="p-float-label">
+                <input
+                  id="cLastName"
+                  type="text"
+                  value="{{ veteran?.clastName }}"
+                  pInputText
+                  formControlName="clastName"
+                />
+                <label for="cLastName">Last Name</label>
+              </span>
+              <div
+                *ngIf="
+                  getControl.clastName.touched && getControl.clastName.invalid
+                "
+                class="text-danger"
+              >
+                <small
+                  class="error"
+                  *ngIf="getControl.clastName.errors?.required"
+                >
+                  Please enter a valid last name.
+                </small>
+                <small
+                  class="error"
+                  *ngIf="getControl.clastName.errors?.minlength"
+                >
+                  Minimum 4 characters are required for last name.
+                </small>
+              </div>
             </div>
-            <div class="p-field p-col-12 p-md-4">
-              <input
-                type="text"
-                value="{{ veteran?.contactPersonRelationship }}"
-                pInputText
-                formControlName="contactPersonRelationship"
-                placeholder="Contact person relationship"
-              />
-            </div>
+           
+            
+             
+              <div class="p-field p-col-12 p-md-4">
+              <span class="p-float-label">
+                <p-dropdown
+                  inputId="relationship"
+                  [autoDisplayFirst]="false"
+                  [options]="relations"
+                  formControlName="selectedRelationship"
+                  optionLabel="name"
+                  placeholder="--None--"
+                >
+                </p-dropdown>
+                <label for="relationship"
+                  >Select Contact Person Relationship</label
+                >
+              </span>
+
+              <ng-template pTemplate="selectedItem">
+                <div
+                  class="country-item country-item-value"
+                  *ngIf="selectedRelationship"
+                >
+                  <div>{{ selectedRelationship.name }}</div>
+                </div>
+              </ng-template>
+            
+              </div>
+            
           </div>
         </fieldset>
         <!-- Contact Person's Information  End-->
@@ -855,37 +937,18 @@
                   type="text"
                   pInputText
                   formControlName="cZip"
-                  placeholder="Zip"
-                  mask="99999-9999"
+                  mask="00000-0000||00000"
                 />
                 <label for="Zip">Zip</label>
               </span>
-              <!-- <div
-                *ngIf="
-                  getControl.cZip.touched && getControl.cZip.invalid
-                "
-                class="text-danger"
-              >
-                <small
-                  class="error"
-                  *ngIf="getControl.cZip.errors?.required"
-                >
-                  Please enter a valid zip.
-                </small>
-                <small
-                  class="error"
-                  *ngIf="getControl.cZip.errors?.minlength"
-                >
-                  Minimum 4 characters are required for zip.
-                </small>
-              </div> -->
             </div>
           </div>
         </fieldset>
         <!-- Contact Person's Address End -->
 
         <button
-          type="submit"
+          [disabled]="veteranProfileForm.invalid"
+          type="update"
           pButton
           label="Submit"
           class="p-button-outlined"

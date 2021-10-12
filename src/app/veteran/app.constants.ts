@@ -55,11 +55,30 @@ export const states = [
     {name: 'Muslim'},
     {name: 'Christain'},
   ];
+
+  export const relations = [
+    {name: 'Mother'},
+    {name: 'Father'},
+    {name: 'Wife'},
+  ];
   
   export const languages = [
     {name: 'English'},
     {name: 'Telugu'},
     {name: 'Hindi'},
+  ];
+
+  export const genders = [
+    {name: 'Male'},
+    {name: 'Female'},
+    {name: 'Other'},
+  ];
+
+  export const statuses = [
+    {name: 'Single'},
+    {name: 'Married'},
+    {name: 'Widowed'},
+    {name: 'Divorced'},
   ];
 
   export const races = [

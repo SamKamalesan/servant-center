@@ -1,6 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { languages, relegions, states } from '../../app.constants';
+import {
+  genders,
+  languages,
+  relegions,
+  states,
+  relations,
+  races,
+  statuses,
+} from '../../app.constants';
 import { VeteranprofileService } from '../../services/veteranprofile.service';
 
 interface State {
@@ -8,12 +16,31 @@ interface State {
 }
 
 interface Relegion {
-  name : string;
+  name: string;
 }
 
 interface Language {
-  name : string;
+  name: string;
 }
+
+interface Gender {
+  name: string;
+}
+
+interface Status {
+  name: string;
+}
+
+
+interface Relation {
+  name: string;
+}
+
+interface Race {
+  name: string;
+}
+
+
 
 @Component({
   selector: 'app-veteran-profile',
@@ -24,23 +51,18 @@ export class VeteranProfileComponent implements OnInit {
   veteranProfileForm!: FormGroup;
   submitted: boolean = false;
   states: State[];
-  relegions : Relegion[];
-  languages : Language[];
+  relegions: Relegion[];
+  languages: Language[];
+  maritalStatus : Status[];
+  relations : Relation[];
+  races : Race[];
   selectedState!: State;
   selectedLanguage!: Language;
   veteran: any;
-  selectedGender: any = null;
-  selectedMartialStatus: any = null;
+  selectedGender: any = null; 
+  selectedMaritalStatus! : Status;
   public customPatterns = { '0': { pattern: new RegExp('[a-zA-Z]') } };
-  genders: any[] = [
-    { name: 'Female', key: 'A' },
-    { name: 'Male', key: 'M' },
-  ];
-  martialStatuses: any[] = [
-    { name: 'Single', key: 'S' },
-    { name: 'Married', key: 'M' },
-  ];
-
+  genders: Gender[];
 
   recordNo: any;
   userName: any;
@@ -63,23 +85,24 @@ export class VeteranProfileComponent implements OnInit {
   country: any;
   city: any;
   state: any;
-  language : any ;
+  language: any;
   gender: any;
   zipCode: any;
-  martialStatus: any;
   ssnNumber: any;
   hmisIdNo: any;
   primaryLanguage: any;
   relegiousPreferences: any;
   hobbies: any;
+  selectedRelationship : any;
   contactPersonCity: any;
   contactPersonState: any;
   contactPersonZip: any;
-  contactPersonPhoneNumber : any;
+  contactPersonPhoneNumber: any;
   contactPersonHouseNumber: any;
   contactPersonRelationship: any;
-  race: any;
-  contactPersonStreetName : any;
+  selectedRace : any;
+  race : any;
+  contactPersonStreetName: any;
   name: any;
 
   constructor(
@@ -89,15 +112,20 @@ export class VeteranProfileComponent implements OnInit {
     this.states = states;
     this.relegions = relegions;
     this.languages = languages;
+    this.genders = genders;
+    this.maritalStatus = statuses;
+    this.relations = relations;
+    this.races = races;
   }
 
   ngOnInit(): void {
     console.log(this.name);
     this.selectedGender = this.genders[1];
-    this.selectedMartialStatus = this.martialStatuses[1];
+    this.selectedMaritalStatus = this.maritalStatus[1];
+    this.selectedRelationship = this.relations[1];
+    this.selectedRace = this.races[1];
 
     this.service.getVeteranProfileDetailsByRecordNumber().subscribe((data) => {
-    
       this.veteran = data;
       this.recordNo = this.veteran.recordNo;
       this.caseManager = this.veteran.caseManager;
@@ -119,12 +147,12 @@ export class VeteranProfileComponent implements OnInit {
       this.country = this.veteran.country;
       this.city = this.veteran.city;
       this.state = this.veteran.state;
-      this.gender = this.veteran.gender;
+      
       this.zipCode = this.veteran.zipCode;
-      this.martialStatus = this.veteran.martialStatus;
+      
       this.ssnNumber = this.veteran.ssnNumber;
       this.hmisIdNo = this.veteran.hmisIdNo;
-      this.language = this.veteran.language;
+      
       this.relegiousPreferences = this.veteran.relegiousPreferences;
       this.hobbies = this.veteran.hobbies;
       this.contactPersonStreetName = this.veteran.contactPersonStreetName;
@@ -134,7 +162,6 @@ export class VeteranProfileComponent implements OnInit {
       this.contactPersonHouseNumber = this.veteran.contactPersonHouseNumber;
       this.contactPersonPhoneNumber = this.veteran.contactPersonPhoneNumber;
       this.contactPersonRelationship = this.veteran.contactPersonRelationship;
-      this.race = this.veteran.race;
       this.contactPersonZip = this.contactPersonZip;
       this.buildForm();
       console.log(this.veteranProfileForm.value);
@@ -144,8 +171,8 @@ export class VeteranProfileComponent implements OnInit {
 
   buildForm() {
     this.veteranProfileForm = this.formBuilder.group({
-      recordNo:[this.recordNo],
-      intakeDOB: [this.intakeDOB,Validators.required],
+      recordNo: [this.recordNo],
+      intakeDOB: [this.intakeDOB, Validators.required],
       caseManager: [this.caseManager, Validators.required],
       veteranId: [this.veteranId, Validators.required],
       firstName: [
@@ -160,38 +187,41 @@ export class VeteranProfileComponent implements OnInit {
       lastName: [this.lastName, [Validators.required, Validators.minLength(4)]],
       nickName: [this.nickName, Validators.required],
       DOB: [this.dob, Validators.required],
-      POB: [this.pob, Validators.required],
+      POB: [this.pob, [Validators.required,Validators.minLength(2)]],
 
       emailId: [
         this.emailId,
-        [Validators.required,
-        Validators.pattern('/^[a-z]+[a-z0-9._]+@[a-z]+/.[a-z.]{2,5}$/'),
-      ]],
+        [
+          Validators.required,
+          Validators.pattern('/^[a-z]+[a-z0-9._]+@[a-z]+/.[a-z.]{2,5}$/'),
+        ],
+      ],
       phoneNumber: [this.phoneNumber],
 
       cfirstName: [
         this.contactPersonFirstName,
-       [Validators.required,
-        Validators.minLength(4)]
+        [Validators.required, Validators.minLength(3)],
       ],
-      cmiddleName: [this.contactPersonMiddleName],
+      cmiddleName: [this.contactPersonMiddleName,Validators.required,Validators.minLength(3)],
       clastName: [
         this.contactPersonLastName,
-        [Validators.required,
-        Validators.minLength(4)]
+        Validators.required,
       ],
 
-      address1: [this.address1, Validators.required],
-      city: [this.city, Validators.required],
+      address1: [this.address1, [Validators.required,Validators.minLength(4)]],
+      city: [this.city,  [Validators.required,Validators.minLength(4)]],
       selectedState: [this.state, Validators.required],
+      selectedRelationship: [
+        this.contactPersonRelationship,
+        Validators.required,
+      ],
       country: [this.country, Validators.required],
       address2: [this.address2, Validators.required],
-      zipCode: [this.zipCode, Validators.required],
+      zipCode: [this.zipCode, [Validators.required,Validators.minLength(5)]],
 
       selectedGender: [this.gender, Validators.required],
-      selectedMartialStatus: [this.martialStatus, Validators.required],
-
-      SSNNumber: [this.ssnNumber],
+      selectedMaritalStatus : [this.maritalStatus, Validators.required],
+      SSNNumber: [this.ssnNumber, [Validators.required,Validators.minLength(5)]],
       hmisIdNo: [this.hmisIdNo, Validators.required],
 
       primaryLanguage: [this.language, Validators.required],
@@ -201,14 +231,20 @@ export class VeteranProfileComponent implements OnInit {
       cStreet: [this.contactPersonStreetName, Validators.required],
       cCity: [this.contactPersonCity, Validators.required],
       cState: [this.contactPersonState, Validators.required],
-      cZip: [this.contactPersonZip,[Validators.required, Validators.minLength(4)]],
-      cHouseNumber: [this.contactPersonHouseNumber, [Validators.required,Validators.minLength(4)]],
-      cPhoneNumber: [this.contactPersonPhoneNumber, [Validators.required,Validators.minLength(10)]],
-      race: [this.race, Validators.required],
-      contactPersonRelationship: [
-        this.contactPersonRelationship,
-        Validators.required,
+      cZip: [
+        this.contactPersonZip,
+        [Validators.required, Validators.minLength(4)],
       ],
+      cHouseNumber: [
+        this.contactPersonHouseNumber,
+        [Validators.required, Validators.minLength(4)],
+      ],
+      cPhoneNumber: [
+        this.contactPersonPhoneNumber,
+        [Validators.required, Validators.minLength(10)],
+      ],
+      selectedRace: [this.selectedRace, Validators.required],
+      
     });
   }
 
