@@ -50,3 +50,20 @@ export const states = [
     {name: 'Wyoming'},
   ];
 
+  export const relegions = [
+    {name: 'Hindu'},
+    {name: 'Muslim'},
+    {name: 'Christain'},
+  ];
+  
+  export const languages = [
+    {name: 'English'},
+    {name: 'Telugu'},
+    {name: 'Hindi'},
+  ];
+
+  export const races = [
+    {name: 'White'},
+    {name: 'Native Hawaiian/Other Pacific Islander'},
+    {name: 'Hispanic/Latino'},
+  ];

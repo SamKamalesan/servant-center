@@ -13,72 +13,74 @@
         </div>
         <div id="first_div" class="p-fluid p-grid">
           <div class="p-field p-col-12 p-md-4">
-            <span  class="p-float-label">
-            <input
-              id="Record #"
-              type="text"
-              class="disable"
-              value="{{veteran.recordNo}}"
-              pInputText
-              formControlName="recordNo"
-            />
-            <label for="Record #">Record #</label>
+            <span class="p-float-label">
+              <input
+                id="Record #"
+                type="text"
+                class="disable"
+                value="{{ veteran.recordNo }}"
+                pInputText
+                formControlName="recordNo"
+              />
+              <label for="Record #">Record #</label>
             </span>
           </div>
           <div class="p-field p-col-12 p-md-4">
-            <span  class="p-float-label">
-            <p-calendar id="Intake DOB"
-            formControlName="intakeDOB"
-            [inline]="false"
-            [showIcon]="true"
-            class="disable"
-            placeholder="Intake DOB(mm/dd/yyyy)">
-            </p-calendar>
-            <label for="Intake DOB"></label>
+            <span class="p-float-label">
+              <p-calendar
+                id="Intake DOB"
+                formControlName="intakeDOB"
+                [inline]="false"
+                [showIcon]="true"
+                class="disable"
+                placeholder="Intake DOB(mm/dd/yyyy)"
+              >
+              </p-calendar>
+              <label for="Intake DOB"></label>
             </span>
           </div>
           <div class="p-field p-col-12 p-md-4">
-            <span  class="p-float-label">
-            <input
-            id="Case Manager"
-              type="text"
-              class="disable"
-            
-              pInputText
-              formControlName="caseManager"
-            />
-            <label for="Case Manager">Case Manager</label>
-          </span>
+            <span class="p-float-label">
+              <input
+                id="Case Manager"
+                type="text"
+                class="disable"
+                pInputText
+                formControlName="caseManager"
+              />
+              <label for="Case Manager">Case Manager</label>
+            </span>
           </div>
           <div class="p-field p-col-12 p-md-4">
-            <span  class="p-float-label">
-            <input
-              id="Veteran Id"
-              type="text"
-              class="disable"
-             
-              pInputText
-              formControlName="veteranId"
-            />
-            <label for="Veteran Id">Veteran Id</label>
-          </span>
+            <span class="p-float-label">
+              <input
+                id="Veteran Id"
+                type="text"
+                class="disable"
+                pInputText
+                formControlName="veteranId"
+              />
+              <label for="Veteran Id">Veteran Id</label>
+            </span>
           </div>
         </div>
 
         <!-- Person Info start -->
         <fieldset class="field_set">
-          <legend class="fieldset_legand"  class="p-col heading"><span class="title">PERSON'S INFORMATION</span></legend>
-          <div class="p-fluid  p-grid">
+          <legend class="fieldset_legand" class="p-col heading">
+            <span class="title">PERSON'S INFORMATION</span>
+          </legend>
+          <div class="p-fluid p-grid">
             <div class="p-field p-col-12 p-md-4">
-            <span  class="p-float-label">
-              <input
-                id="First Name"
-                type="text"
-                pInputText
-                formControlName="firstName"
-              />
-              <label for="First Name">First Name</label>
-             </span>
+              <span class="p-float-label">
+                <input
+                  id="First Name"
+                  type="text"
+                  pInputText
+                  formControlName="firstName"
+                />
+                <label for="First Name">First Name</label>
+              </span>
               <div
                 *ngIf="
                   getControl.firstName.touched && getControl.firstName.invalid
@@ -102,35 +104,35 @@
 
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
               <span class="p-float-label">
-              <input
-                type="text"
-                id="Last Name"
-                pInputText
-                formControlName="middleName"
-              />
-              <label for="Middle Name">Middle Name</label>
+                <input
+                  type="text"
+                  id="Last Name"
+                  pInputText
+                  formControlName="middleName"
+                />
+                <label for="Middle Name">Middle Name</label>
               </span>
             </div>
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
               <span class="p-float-label">
-              <input
-              required
-              id="Last Name"
-                type="text"
-                pInputText
-                formControlName="lastName"
-              />
-              <label for="Last Name">Last Name</label>
+                <input
+                  required
+                  id="Last Name"
+                  type="text"
+                  pInputText
+                  formControlName="lastName"
+                />
+                <label for="Last Name">Last Name</label>
               </span>
               <div
                 *ngIf="
-                getControl.lastName.touched && getControl.lastName.invalid 
+                  getControl.lastName.touched && getControl.lastName.invalid
                 "
                 class="text-danger"
               >
                 <small
-                class="error"
-                *ngIf="getControl.lastName.errors?.required"
+                  class="error"
+                  *ngIf="getControl.lastName.errors?.required"
                 >
                   Last Name is required.
                 </small>
@@ -143,16 +145,16 @@
               </div>
             </div>
           </div>
-          <div class="p-fluid p-formgrid p-grid">
+          <div class="p-fluid p-grid">
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
               <span class="p-float-label">
-              <input
-                id="Nick Name"
-                type="text"
-                pInputText
-                formControlName="nickName"
-              />
-              <label for="Nick Name">Nick Name</label>
+                <input
+                  id="Nick Name"
+                  type="text"
+                  pInputText
+                  formControlName="nickName"
+                />
+                <label for="Nick Name">Nick Name</label>
               </span>
             </div>
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
@@ -176,15 +178,15 @@
           <div class="p-fluid p-grid">
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
               <span class="p-float-label">
-              <input
-              id="SSN #"
-                type="text"
-                pInputText
-                formControlName="SSNNumber"
-                mask ="000-000"
-              />
-              <label for="SSN #">SSN #</label>
-            </span>
+                <input
+                  id="SSN #"
+                  type="text"
+                  pInputText
+                  formControlName="SSNNumber"
+                  mask="000-000"
+                />
+                <label for="SSN #">SSN #</label>
+              </span>
               <div
                 *ngIf="
                   getControl.SSNNumber.touched && getControl.SSNNumber.invalid
@@ -207,15 +209,15 @@
             </div>
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
               <span class="p-float-label">
-              <input
-              id="HMIS ID #"
-                type="text"
-                pInputText
-                formControlName="hmisIdNo"
-                mask ="000-000"
-              />
-              <label for="HMIS ID #">HMIS ID #</label>
-            </span>
+                <input
+                  id="HMIS ID #"
+                  type="text"
+                  pInputText
+                  formControlName="hmisIdNo"
+                  mask="000-000"
+                />
+                <label for="HMIS ID #">HMIS ID #</label>
+              </span>
               <div
                 *ngIf="
                   getControl.hmisIdNo.touched && getControl.hmisIdNo.invalid
@@ -273,21 +275,23 @@
 
         <!-- Contact Info -->
         <fieldset class="field_set">
-          <legend class="fieldset_legand"  class="p-col heading"><span class="title">CONTACT INFORMATION</span></legend>
-          <div class="p-fluid  p-grid">
+          <legend class="fieldset_legand" class="p-col heading">
+            <span class="title">CONTACT INFORMATION</span>
+          </legend>
+          <div class="p-fluid p-grid">
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
               <span class="p-float-label">
-              <input
-              id="Email Id"
-                type="email"
-                formControlName="emailId"
-                class="form-control"
-                pInputText
-                mask="SA*@A*.SSS"
-             [showMaskTyped]="true" 
-              />
-              <label for="Email Id">Email Id</label>
-            </span>
+                <input
+                  id="Email Id"
+                  type="email"
+                  formControlName="emailId"
+                  class="form-control"
+                  pInputText
+                  mask="SA*@A*.SSS"
+                  [showMaskTyped]="true"
+                />
+                <label for="Email Id">Email Id</label>
+              </span>
               <div
                 *ngIf="getControl.emailId.touched && getControl.emailId.invalid"
                 class="text-danger"
@@ -308,19 +312,19 @@
             </div>
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
               <span class="p-float-label">
-              <input
-              id="Phone Number"
-                type="text"
-                formControlName="phoneNumber"
-                class="form-control"
-                mask="(000) 000-0000" prefix="+1" 
-                pInputText
-              />
-              <label for="Phone Number">Phone Number</label>
-            </span>
+                <input
+                  id="Phone Number"
+                  type="text"
+                  formControlName="phoneNumber"
+                  class="form-control"
+                  mask="(000) 000-0000"
+                  prefix="+1"
+                  pInputText
+                />
+                <label for="Phone Number">Phone Number</label>
+              </span>
             </div>
           </div>
-          
         </fieldset>
         <!-- Contact Info End -->
 
@@ -427,7 +431,9 @@
 
         <!-- Address Info start -->
         <fieldset class="field_set">
-          <legend class="fieldset_legand"  class="p-col heading">ADDRESS INFORMATION</legend>
+          <legend class="fieldset_legand" class="p-col heading">
+            ADDRESS INFORMATION
+          </legend>
           <div class="p-fluid p-grid">
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
               <input
@@ -467,21 +473,14 @@
                 *ngIf="getControl.city.touched && getControl.city.invalid"
                 class="text-danger"
               >
-                <small
-                  class="error"
-                  *ngIf="getControl.city.errors?.required"
-                >
+                <small class="error" *ngIf="getControl.city.errors?.required">
                   city is required.
                 </small>
-                <small
-                  class="error"
-                  *ngIf="getControl.city.errors?.minlength"
-                >
+                <small class="error" *ngIf="getControl.city.errors?.minlength">
                   Minimum 4 character are required.
                 </small>
               </div>
             </div>
-
 
             <!-- <div class="p-field p-col-12 p-md-4">
               <span class="p-float-label">
@@ -497,17 +496,16 @@
             </div> -->
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
               <span class="p-float-label">
-              <p-dropdown
-              inputId="Select State"
-              [autoDisplayFirst]="false"
-                [options]="states"
-                formControlName="selectedState"
-                optionLabel="name"
-              >
-              </p-dropdown>
-              <label for="Select State">Select State</label>
-
-            </span>
+                <p-dropdown
+                  inputId="Select State"
+                  [autoDisplayFirst]="false"
+                  [options]="states"
+                  formControlName="selectedState"
+                  optionLabel="name"
+                >
+                </p-dropdown>
+                <label for="Select State">Select State</label>
+              </span>
             </div>
             <ng-template pTemplate="selectedItem">
               <div
@@ -517,6 +515,7 @@
                 <div>{{ selectedState.name }}</div>
               </div>
             </ng-template>
+
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
               <input
                 type="text"
@@ -585,56 +584,141 @@
 
         <!-- Other Info start -->
         <fieldset class="field_set">
-          <legend class="fieldset_legand"  class="p-col heading">OTHER INFORMATION</legend>
+          <legend class="fieldset_legand" class="p-col heading">
+            OTHER INFORMATION
+          </legend>
+          <div class="p-fluid p-grid">
+            <div id="fields_margin" class="p-field p-col-12 p-md-4">
+              <span class="p-float-label">
+                <input
+                  id="hobbies"
+                  type="text"
+                  pInputText
+                  formControlName="hobbies"
+                />
+                <label for="hobbies">Hobbies</label>
+              </span>
+            </div>
+            <div id="fields_margin" class="p-field p-col-12 p-md-4">
+             
+                <input
+                  id="primaryLanguage"
+                  type="text"
+                  pInputText
+                  formControlName="primaryLanguage"
+                />
+                </div>
+
+               
+                <!-- <p-dropdown
+                  inputId="primaryLanguage"
+                  [autoDisplayFirst]="false"
+                  [options]="languages"
+                  formControlName="selectedLanguage"
+                  optionLabel="name"
+                >
+                </p-dropdown>
+
+                <label for="primaryLanguage">Primary Language</label>
+              </span>
+
+            </div>
+            <ng-template pTemplate="selectedItem">
+              <div
+                class="country-item country-item-value"
+                *ngIf="selectedLanguage"
+              >
+                <div>{{ selectedLanguage.name }}</div>
+              </div>
+            </ng-template> -->
+            
+              <!-- <div
+                *ngIf="
+                  getControl.primaryLanguage.touched &&
+                  getControl.primaryLanguage.invalid
+                "
+                class="text-danger"
+              >
+                <small
+                  class="error"
+                  *ngIf="getControl.primaryLanguage.errors?.required"
+                >
+                  Please enter a valid primary language.
+                </small>
+                <small
+                  class="error"
+                  *ngIf="getControl.primaryLanguage.errors?.minlength"
+                >
+                  Minimum 4 character are required.
+                </small>
+              </div> -->
+            
+
+            <div id="fields_margin" class="p-field p-col-12 p-md-4">
+              <!-- <input
+                type="text"
+                pInputText
+                formControlName="relegiousPreferences"
+                placeholder="Religious Preferences"
+              /> -->
+              <span class="p-float-label">
+                <p-dropdown
+                  inputId="Select RelegiousPreference"
+                  [autoDisplayFirst]="false"
+                  [options]="relegions"
+                  formControlName="selectedRelegion"
+                  optionLabel="name"
+                >
+                </p-dropdown>
+                <label for="Select RelegiousPreference"
+                  >Relegious Preference</label
+                >
+              </span>
+            </div>
+            </div>
+            <div
+              *ngIf="
+                getControl.primaryLanguage.touched &&
+                getControl.primaryLanguage.invalid
+              "
+              class="text-danger"
+            >
+              <small
+                class="error"
+                *ngIf="getControl.primaryLanguage.errors?.required"
+              >
+                Please enter a valid primary language.
+              </small>
+              <small
+                class="error"
+                *ngIf="getControl.primaryLanguage.errors?.minlength"
+              >
+                Minimum 4 character are required.
+              </small>
+            </div>
+          
           <div class="p-fluid p-grid">
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
               <input
                 type="text"
                 pInputText
-                formControlName="hobbies"
-                placeholder="Hobbies"
+                formControlName="race"
+                placeholder="Race"
               />
             </div>
-            <div id="fields_margin" class="p-field p-col-12 p-md-4">
-              <input
-                type="text"
-                pInputText
-                formControlName="primaryLanguage"
-                placeholder="Primary Language"
-              />
-            </div>
-            <div id="fields_margin" class="p-field p-col-12 p-md-4">
-              <input
-                type="text"
-                pInputText
-                formControlName="relegiousPreferences"
-                placeholder="Religious Preferences"
-              />
-            </div>
-           
-              <div id="fields_margin" class="p-field p-col-12 p-md-4">
-                <input
-                  type="text"
-                  pInputText
-                  formControlName="race"
-                  placeholder="Race"
-                />
-              </div>
-            
           </div>
         </fieldset>
         <!-- Other Info End -->
 
         <!-- Contact Person's Information Start -->
         <fieldset class="field_set">
-          <legend class="fieldset_legand"  class="p-col heading">
+          <legend class="fieldset_legand" class="p-col heading">
             CONTACT PERSON'S INFORMATION :
           </legend>
-          <div class="p-fluid  p-grid">
+          <div class="p-fluid p-grid">
             <div class="p-field p-col-12 p-md-4">
               <input
                 type="text"
-                
                 pInputText
                 formControlName="cfirstName"
                 placeholder="First Name"
@@ -673,30 +757,74 @@
 
         <!--  Contact Person's Address Start -->
         <fieldset id="last_flex" class="field_set">
-          <legend class="fieldset_legand"  class="p-col heading">CONTACT PERSON'S ADDRESS</legend>
-          <div class="p-fluid  p-grid">
+          <legend class="fieldset_legand" class="p-col heading">
+            CONTACT PERSON'S ADDRESS
+          </legend>
+          <div class="p-fluid p-grid">
             <div class="p-field p-col-12 p-md-4">
               <input
+                id="House Number"
                 type="text"
                 value="{{ veteran?.cHouseNumber }}"
                 pInputText
                 formControlName="cHouseNumber"
                 placeholder="House Number"
               />
+              <!-- <label for="House Number">House Number</label> -->
+
+              <div
+                *ngIf="
+                  getControl.cHouseNumber.touched &&
+                  getControl.cHouseNumber.invalid
+                "
+                class="text-danger"
+              >
+                <small
+                  class="error"
+                  *ngIf="getControl.cHouseNumber.errors?.required"
+                >
+                  Please enter a valid house number.
+                </small>
+                <small
+                  class="error"
+                  *ngIf="getControl.cHouseNumber.errors?.minlength"
+                >
+                  Minimum 4 character are required.
+                </small>
+              </div>
             </div>
             <div class="p-field p-col-12 p-md-4">
               <input
                 type="text"
-                value="{{ veteran?.cHouseNumber }}"
+                value="{{ veteran?.cPhoneNumber }}"
                 pInputText
-                formControlName="cHouseNumber"
-                placeholder="House Number"
+                formControlName="cPhoneNumber"
+                placeholder="Phone Number"
               />
+              <div
+                *ngIf="
+                  getControl.cPhoneNumber.touched &&
+                  getControl.cPhoneNumber.invalid
+                "
+                class="text-danger"
+              >
+                <small
+                  class="error"
+                  *ngIf="getControl.cPhoneNumber.errors?.required"
+                >
+                  Please enter a valid phone number.
+                </small>
+                <small
+                  class="error"
+                  *ngIf="getControl.cPhoneNumber.errors?.minlength"
+                >
+                  Minimum 10 character are required.
+                </small>
+              </div>
             </div>
             <div class="p-field p-col-12 p-md-4">
               <input
                 type="text"
-                value="{{ veteran?.cStree }}"
                 pInputText
                 formControlName="cStreet"
                 placeholder="Street"
@@ -721,15 +849,36 @@
               />
             </div>
             <div class="p-field p-col-12 p-md-4">
-              <input
-                type="text"
-                value="{{ veteran?.cZip }}"
-                pInputText
-                formControlName="cZip"
-                placeholder="Zip"
-                mask= "99999-9999"
-                [showMaskTyped]="true"
-              />
+              <span class="p-float-label">
+                <input
+                  id="Zip"
+                  type="text"
+                  pInputText
+                  formControlName="cZip"
+                  placeholder="Zip"
+                  mask="99999-9999"
+                />
+                <label for="Zip">Zip</label>
+              </span>
+              <!-- <div
+                *ngIf="
+                  getControl.cZip.touched && getControl.cZip.invalid
+                "
+                class="text-danger"
+              >
+                <small
+                  class="error"
+                  *ngIf="getControl.cZip.errors?.required"
+                >
+                  Please enter a valid zip.
+                </small>
+                <small
+                  class="error"
+                  *ngIf="getControl.cZip.errors?.minlength"
+                >
+                  Minimum 4 characters are required for zip.
+                </small>
+              </div> -->
             </div>
           </div>
         </fieldset>

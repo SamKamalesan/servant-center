@@ -1,10 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { states } from '../../app.constants';
+import { languages, relegions, states } from '../../app.constants';
 import { VeteranprofileService } from '../../services/veteranprofile.service';
 
 interface State {
   name: string;
+}
+
+interface Relegion {
+  name : string;
+}
+
+interface Language {
+  name : string;
 }
 
 @Component({
@@ -16,7 +24,10 @@ export class VeteranProfileComponent implements OnInit {
   veteranProfileForm!: FormGroup;
   submitted: boolean = false;
   states: State[];
+  relegions : Relegion[];
+  languages : Language[];
   selectedState!: State;
+  selectedLanguage!: Language;
   veteran: any;
   selectedGender: any = null;
   selectedMartialStatus: any = null;
@@ -29,6 +40,7 @@ export class VeteranProfileComponent implements OnInit {
     { name: 'Single', key: 'S' },
     { name: 'Married', key: 'M' },
   ];
+
 
   recordNo: any;
   userName: any;
@@ -51,6 +63,7 @@ export class VeteranProfileComponent implements OnInit {
   country: any;
   city: any;
   state: any;
+  language : any ;
   gender: any;
   zipCode: any;
   martialStatus: any;
@@ -62,9 +75,11 @@ export class VeteranProfileComponent implements OnInit {
   contactPersonCity: any;
   contactPersonState: any;
   contactPersonZip: any;
+  contactPersonPhoneNumber : any;
   contactPersonHouseNumber: any;
   contactPersonRelationship: any;
   race: any;
+  contactPersonStreetName : any;
   name: any;
 
   constructor(
@@ -72,6 +87,8 @@ export class VeteranProfileComponent implements OnInit {
     private service: VeteranprofileService
   ) {
     this.states = states;
+    this.relegions = relegions;
+    this.languages = languages;
   }
 
   ngOnInit(): void {
@@ -83,11 +100,8 @@ export class VeteranProfileComponent implements OnInit {
     
       this.veteran = data;
       this.recordNo = this.veteran.recordNo;
-      this.userName = this.veteran.firstName;
-      this.dob = this.veteran.dob;
-      this.intakeDOB = this.veteran.intakeDOB;
-      this.userName = this.veteran.firstName;
       this.caseManager = this.veteran.caseManager;
+      this.intakeDOB = this.veteran.intakeDOB;
       this.veteranId = this.veteran.veteranId;
       this.firstName = this.veteran.firstName;
       this.middleName = this.veteran.middleName;
@@ -101,7 +115,7 @@ export class VeteranProfileComponent implements OnInit {
       this.contactPersonMiddleName = this.veteran.contactPersonMiddleName;
       this.contactPersonLastName = this.veteran.contactPersonLastName;
       this.address1 = this.veteran.address1;
-      this.address2 = this.veteran.address1;
+      this.address2 = this.veteran.address2;
       this.country = this.veteran.country;
       this.city = this.veteran.city;
       this.state = this.veteran.state;
@@ -110,15 +124,18 @@ export class VeteranProfileComponent implements OnInit {
       this.martialStatus = this.veteran.martialStatus;
       this.ssnNumber = this.veteran.ssnNumber;
       this.hmisIdNo = this.veteran.hmisIdNo;
-      this.primaryLanguage = this.veteran.primaryLanguage;
+      this.language = this.veteran.language;
       this.relegiousPreferences = this.veteran.relegiousPreferences;
       this.hobbies = this.veteran.hobbies;
+      this.contactPersonStreetName = this.veteran.contactPersonStreetName;
       this.contactPersonCity = this.veteran.contactPersonCity;
       this.contactPersonState = this.veteran.contactPersonState;
       this.contactPersonZip = this.veteran.contactPersonZip;
       this.contactPersonHouseNumber = this.veteran.contactPersonHouseNumber;
+      this.contactPersonPhoneNumber = this.veteran.contactPersonPhoneNumber;
       this.contactPersonRelationship = this.veteran.contactPersonRelationship;
       this.race = this.veteran.race;
+      this.contactPersonZip = this.contactPersonZip;
       this.buildForm();
       console.log(this.veteranProfileForm.value);
       console.log(this.recordNo);
@@ -132,7 +149,7 @@ export class VeteranProfileComponent implements OnInit {
       caseManager: [this.caseManager, Validators.required],
       veteranId: [this.veteranId, Validators.required],
       firstName: [
-        this.userName,
+        this.firstName,
         [
           Validators.required,
           Validators.minLength(4),
@@ -177,14 +194,16 @@ export class VeteranProfileComponent implements OnInit {
       SSNNumber: [this.ssnNumber],
       hmisIdNo: [this.hmisIdNo, Validators.required],
 
-      primaryLanguage: [this.primaryLanguage, Validators.required],
+      primaryLanguage: [this.language, Validators.required],
       relegiousPreferences: [this.relegiousPreferences, Validators.required],
       hobbies: [this.hobbies, Validators.required],
 
+      cStreet: [this.contactPersonStreetName, Validators.required],
       cCity: [this.contactPersonCity, Validators.required],
       cState: [this.contactPersonState, Validators.required],
-      cZip: [this.contactPersonZip],
-      cHouseNumber: [this.contactPersonHouseNumber, Validators.required],
+      cZip: [this.contactPersonZip,[Validators.required, Validators.minLength(4)]],
+      cHouseNumber: [this.contactPersonHouseNumber, [Validators.required,Validators.minLength(4)]],
+      cPhoneNumber: [this.contactPersonPhoneNumber, [Validators.required,Validators.minLength(10)]],
       race: [this.race, Validators.required],
       contactPersonRelationship: [
         this.contactPersonRelationship,
