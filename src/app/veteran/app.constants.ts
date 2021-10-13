@@ -49,7 +49,6 @@ export const states = [
     {name: 'Wisconsin'},
     {name: 'Wyoming'},
   ];
-
   export const relegions = [
     {name: 'Hindu'},
     {name: 'Muslim'},

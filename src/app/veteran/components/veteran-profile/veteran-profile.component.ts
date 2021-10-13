@@ -104,6 +104,8 @@ export class VeteranProfileComponent implements OnInit {
   race : any;
   contactPersonStreetName: any;
   name: any;
+  maxDateValue: Date;
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -116,6 +118,9 @@ export class VeteranProfileComponent implements OnInit {
     this.maritalStatus = statuses;
     this.relations = relations;
     this.races = races;
+    this.maxDateValue = new Date(new Date().getTime());
+   
+ 
   }
 
   ngOnInit(): void {
@@ -152,7 +157,7 @@ export class VeteranProfileComponent implements OnInit {
       
       this.ssnNumber = this.veteran.ssnNumber;
       this.hmisIdNo = this.veteran.hmisIdNo;
-      
+      this.race = this.veteran.race;
       this.relegiousPreferences = this.veteran.relegiousPreferences;
       this.hobbies = this.veteran.hobbies;
       this.contactPersonStreetName = this.veteran.contactPersonStreetName;
@@ -196,7 +201,8 @@ export class VeteranProfileComponent implements OnInit {
           Validators.pattern('/^[a-z]+[a-z0-9._]+@[a-z]+/.[a-z.]{2,5}$/'),
         ],
       ],
-      phoneNumber: [this.phoneNumber],
+      
+      phoneNumber: [this.phoneNumber, Validators.required],
 
       cfirstName: [
         this.contactPersonFirstName,
@@ -221,8 +227,8 @@ export class VeteranProfileComponent implements OnInit {
 
       selectedGender: [this.gender, Validators.required],
       selectedMaritalStatus : [this.maritalStatus, Validators.required],
-      SSNNumber: [this.ssnNumber, [Validators.required,Validators.minLength(5)]],
-      hmisIdNo: [this.hmisIdNo, Validators.required],
+      SSNNumber: [this.ssnNumber, [Validators.required,Validators.minLength(11)]],
+      hmisIdNo: [this.hmisIdNo,[Validators.required,Validators.minLength(9)]],
 
       primaryLanguage: [this.language, Validators.required],
       relegiousPreferences: [this.relegiousPreferences, Validators.required],
@@ -260,4 +266,9 @@ export class VeteranProfileComponent implements OnInit {
     // console.log(this.response);
     console.log(this.veteranProfileForm.value);
   }
+
+  resetForm(){
+    this.veteranProfileForm.reset();
+  }
+
 }

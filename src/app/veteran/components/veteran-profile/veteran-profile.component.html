@@ -161,6 +161,7 @@
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
               <p-calendar
                 formControlName="DOB"
+                [maxDate]="maxDateValue"
                 [inline]="false"
                 [showIcon]="true"
                 placeholder="Date Of Birth (mm/dd/yyyy)"
@@ -169,31 +170,18 @@
             </div>
             <div class="p-field p-col-12 p-md-4">
               <span class="p-float-label">
-              <input
-                id="pob"
-                type="text"
-                pInputText
-                formControlName="POB"
-              />
-              <label for="pob">Place of Birth</label>
+                <input id="pob" type="text" pInputText formControlName="POB" />
+                <label for="pob">Place of Birth</label>
               </span>
               <div
-                *ngIf="
-                  getControl.POB.touched && getControl.POB.invalid
-                "
+                *ngIf="getControl.POB.touched && getControl.POB.invalid"
                 class="text-danger"
               >
-                <small
-                  class="error"
-                  *ngIf="getControl.POB.errors?.required"
-                >
-                Please enter a valid place of birth.           
-                   </small>
-                <small
-                  class="error"
-                  *ngIf="getControl.POB.errors?.minlength"
-                >
-                Minimum 3 characters are required for place of birth.
+                <small class="error" *ngIf="getControl.POB.errors?.required">
+                  Please enter a valid place of birth.
+                </small>
+                <small class="error" *ngIf="getControl.POB.errors?.minlength">
+                  Minimum 3 characters are required for place of birth.
                 </small>
               </div>
             </div>
@@ -207,29 +195,30 @@
                   type="text"
                   pInputText
                   formControlName="SSNNumber"
-                  mask="000-000"
+                  mask="000-00-0000"
                 />
                 <label for="SSN #">SSN #</label>
               </span>
-              <div
+              <small
+                class="error"
                 *ngIf="
-                  getControl.SSNNumber.touched && getControl.SSNNumber.invalid
+                  getControl.SSNNumber.touched &&
+                  getControl.SSNNumber.errors?.required
                 "
-                class="text-danger"
               >
-                <small
-                  class="error"
-                  *ngIf="getControl.SSNNumber.errors?.required"
-                >
-                  SSN # is required.
-                </small>
-                <small
-                  class="error"
-                  *ngIf="getControl.SSNNumber.errors?.minlength"
-                >
-                  SSN # seems invalid.
-                </small>
-              </div>
+                ssn number is required.
+              </small>
+
+              <small
+                class="error"
+                *ngIf="
+                  getControl.SSNNumber.touched &&
+                  getControl.SSNNumber.invalid &&
+                  !getControl.SSNNumber.errors?.required
+                "
+              >
+              ssn number is invalid.
+              </small>
             </div>
 
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
@@ -243,25 +232,26 @@
                 />
                 <label for="HMIS ID #">HMIS ID #</label>
               </span>
-              <div
+              <small
+                class="error"
                 *ngIf="
-                  getControl.hmisIdNo.touched && getControl.hmisIdNo.invalid
+                  getControl.hmisIdNo.touched &&
+                  getControl.hmisIdNo.errors?.required
                 "
-                class="text-danger"
               >
-                <small
-                  class="error"
-                  *ngIf="getControl.hmisIdNo.errors?.required"
-                >
-                  hmisIdNo is required.
-                </small>
-                <small
-                  class="error"
-                  *ngIf="getControl.hmisIdNo.errors?.required"
-                >
-                  Hmis Id No seems invalid.
-                </small>
-              </div>
+                hmis id is required.
+              </small>
+
+              <small
+                class="error"
+                *ngIf="
+                  getControl.hmisIdNo.touched &&
+                  getControl.hmisIdNo.invalid &&
+                  !getControl.hmisIdNo.errors?.required
+                "
+              >
+                hmis id is invalid.
+              </small>
             </div>
 
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
@@ -348,6 +338,7 @@
                 </small>
               </div>
             </div>
+
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
               <span class="p-float-label">
                 <input
@@ -356,11 +347,29 @@
                   formControlName="phoneNumber"
                   class="form-control"
                   mask="(000) 000-0000"
-                  prefix="+1"
                   pInputText
                 />
                 <label for="Phone Number">Phone Number</label>
               </span>
+              <small
+                class="error"
+                *ngIf="
+                  getControl.phoneNumber.touched &&
+                  getControl.phoneNumber.errors?.required
+                "
+              >
+                Phone Number is required.
+              </small>
+              <small
+                class="error"
+                *ngIf="
+                  getControl.phoneNumber.touched &&
+                  getControl.phoneNumber.invalid &&
+                  !getControl.phoneNumber.errors?.required
+                "
+              >
+                Phone Number is invalid.
+              </small>
             </div>
           </div>
         </fieldset>
@@ -606,23 +615,26 @@
                 />
                 <label for="zip">Zip</label>
               </span>
-              <div
-                *ngIf="getControl.zipCode.touched && getControl.zipCode.invalid"
-                class="text-danger"
+              <small
+                class="error"
+                *ngIf="
+                  getControl.zipCode.touched &&
+                  getControl.zipCode.errors?.required
+                "
               >
-                <small
-                  class="error"
-                  *ngIf="getControl.zipCode.errors?.required"
-                >
-                  zipCode is required.
-                </small>
-                <small
-                  class="error"
-                  *ngIf="getControl.zipCode.errors?.minlength"
-                >
-                  Minimum 5 digits are required.
-                </small>
-              </div>
+                zip code is required.
+              </small>
+
+              <small
+                class="error"
+                *ngIf="
+                  getControl.zipCode.touched &&
+                  getControl.zipCode.invalid &&
+                  !getControl.zipCode.errors?.required
+                "
+              >
+                Zip code is invalid.
+              </small>
             </div>
           </div>
         </fieldset>
@@ -646,8 +658,6 @@
               </span>
             </div>
 
-
-           
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
               <span class="p-float-label">
                 <p-dropdown
@@ -658,14 +668,9 @@
                   optionLabel="name"
                 >
                 </p-dropdown>
-                <label for="primaryLanguage"
-                  >Primary Language</label
-                >
+                <label for="primaryLanguage">Primary Language</label>
               </span>
             </div>
-
-            
-
 
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
               <span class="p-float-label">
@@ -683,12 +688,11 @@
               </span>
             </div>
           </div>
-         
 
           <div class="p-fluid p-grid">
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
               <span class="p-float-label">
-              <p-dropdown
+                <p-dropdown
                   inputId="race"
                   [autoDisplayFirst]="false"
                   [options]="races"
@@ -696,8 +700,8 @@
                   optionLabel="name"
                 >
                 </p-dropdown>
-              <label for="race">Race</label>
-              </span> 
+                <label for="race">Race</label>
+              </span>
             </div>
           </div>
         </fieldset>
@@ -803,10 +807,8 @@
                 </small>
               </div>
             </div>
-           
-            
-             
-              <div class="p-field p-col-12 p-md-4">
+
+            <div class="p-field p-col-12 p-md-4">
               <span class="p-float-label">
                 <p-dropdown
                   inputId="relationship"
@@ -814,7 +816,6 @@
                   [options]="relations"
                   formControlName="selectedRelationship"
                   optionLabel="name"
-                  placeholder="--None--"
                 >
                 </p-dropdown>
                 <label for="relationship"
@@ -830,9 +831,7 @@
                   <div>{{ selectedRelationship.name }}</div>
                 </div>
               </ng-template>
-            
-              </div>
-            
+            </div>
           </div>
         </fieldset>
         <!-- Contact Person's Information  End-->
@@ -844,14 +843,16 @@
           </legend>
           <div class="p-fluid p-grid">
             <div class="p-field p-col-12 p-md-4">
-              <input
-                id="House Number"
-                type="text"
-                value="{{ veteran?.cHouseNumber }}"
-                pInputText
-                formControlName="cHouseNumber"
-                placeholder="House Number"
-              />
+              <span class="p-float-label">
+                <input
+                  id="houseNumber"
+                  type="text"
+                  pInputText
+                  formControlName="cHouseNumber"
+                />
+                <label for="houseNumber">House Number</label>
+              </span>
+
               <!-- <label for="House Number">House Number</label> -->
 
               <div
@@ -876,59 +877,69 @@
               </div>
             </div>
             <div class="p-field p-col-12 p-md-4">
-              <input
-                type="text"
-                value="{{ veteran?.cPhoneNumber }}"
-                pInputText
-                formControlName="cPhoneNumber"
-                placeholder="Phone Number"
-              />
-              <div
+              <span class="p-float-label">
+                <input
+                  id="phoneNumber"
+                  type="text"
+                  pInputText
+                  formControlName="cPhoneNumber"
+                  mask="(000) 000-0000"
+                />
+                <label for="cPhoneNumber">Phone Number</label>
+              </span>
+              <small
+                class="error"
                 *ngIf="
                   getControl.cPhoneNumber.touched &&
-                  getControl.cPhoneNumber.invalid
+                  getControl.cPhoneNumber.errors?.required
                 "
-                class="text-danger"
               >
-                <small
-                  class="error"
-                  *ngIf="getControl.cPhoneNumber.errors?.required"
-                >
-                  Please enter a valid phone number.
-                </small>
-                <small
-                  class="error"
-                  *ngIf="getControl.cPhoneNumber.errors?.minlength"
-                >
-                  Minimum 10 character are required.
-                </small>
-              </div>
+                Phone Number is required.
+              </small>
+              <small
+                class="error"
+                *ngIf="
+                  getControl.cPhoneNumber.touched &&
+                  getControl.cPhoneNumber.invalid &&
+                  !getControl.cPhoneNumber.errors?.required
+                "
+              >
+                Phone Number is invalid.
+              </small>
             </div>
             <div class="p-field p-col-12 p-md-4">
-              <input
-                type="text"
-                pInputText
-                formControlName="cStreet"
-                placeholder="Street"
-              />
+              <span class="p-float-label">
+                <input
+                  id="cStreet"
+                  type="text"
+                  pInputText
+                  formControlName="cStreet"
+                />
+                <label for="cStreet">Street</label>
+              </span>
             </div>
             <div class="p-field p-col-12 p-md-4">
-              <input
-                type="text"
-                value="{{ veteran?.cCity }}"
-                pInputText
-                formControlName="cCity"
-                placeholder="City"
-              />
+              <span class="p-float-label">
+                <input
+                  id="city"
+                  type="text"
+                  value="{{ veteran?.cCity }}"
+                  pInputText
+                  formControlName="cCity"
+                />
+                <label for="city">City</label>
+              </span>
             </div>
             <div class="p-field p-col-12 p-md-4">
-              <input
-                type="text"
-                value="{{ veteran?.cState }}"
-                pInputText
-                formControlName="cState"
-                placeholder="State"
-              />
+              <span class="p-float-label">
+                <input
+                  id="cState"
+                  type="text"
+                  pInputText
+                  formControlName="cState"
+                />
+                <label for="cState">State</label>
+              </span>
             </div>
             <div class="p-field p-col-12 p-md-4">
               <span class="p-float-label">
@@ -941,6 +952,25 @@
                 />
                 <label for="Zip">Zip</label>
               </span>
+              <small
+                class="error"
+                *ngIf="
+                  getControl.cZip.touched && getControl.cZip.errors?.required
+                "
+              >
+                zip code is required.
+              </small>
+
+              <small
+                class="error"
+                *ngIf="
+                  getControl.cZip.touched &&
+                  getControl.cZip.invalid &&
+                  !getControl.cZip.errors?.required
+                "
+              >
+                Zip code is invalid.
+              </small>
             </div>
           </div>
         </fieldset>
@@ -950,10 +980,14 @@
           [disabled]="veteranProfileForm.invalid"
           type="update"
           pButton
-          label="Submit"
+          label="SUBMIT"
           class="p-button-outlined"
         ></button>
-        <p-button label="Cancel" styleClass="p-button-link"></p-button>
+        <p-button
+          label="RESET"
+          (click)="resetForm()"
+          styleClass="p-button-link"
+        ></p-button>
       </form>
     </div>
   </div>
