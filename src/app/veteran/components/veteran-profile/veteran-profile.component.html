@@ -18,6 +18,7 @@
                 id="Record #"
                 type="text"
                 class="disable"
+                
                 value="{{ veteran.recordNo }}"
                 pInputText
                 formControlName="recordNo"
@@ -77,6 +78,8 @@
                   id="First Name"
                   type="text"
                   pInputText
+                  maxlength=30
+                  pattern="[a-zA-Z]+"
                   formControlName="firstName"
                 />
                 <label for="First Name">First Name</label>
@@ -87,11 +90,14 @@
                 "
                 class="text-danger"
               >
+              <!-- <small class="error" [hidden]="!name.hasError('pattern')"
+                  >only alphabets allowed</small
+                > -->
                 <small
                   class="error"
                   *ngIf="getControl.firstName.errors?.required"
                 >
-                  Please enter a valid first name.
+                  first name is required.
                 </small>
                 <small
                   class="error"
@@ -108,6 +114,7 @@
                   type="text"
                   id="Last Name"
                   pInputText
+                  maxlength=30
                   formControlName="middleName"
                 />
                 <label for="Middle Name">Middle Name</label>
@@ -120,6 +127,7 @@
                   id="Last Name"
                   type="text"
                   pInputText
+                  maxlength=30
                   formControlName="lastName"
                 />
                 <label for="Last Name">Last Name</label>
@@ -151,6 +159,7 @@
               <span class="p-float-label">
                 <input
                   id="Nick Name"
+                  maxlength=30
                   type="text"
                   pInputText
                   formControlName="nickName"
@@ -170,7 +179,7 @@
             </div>
             <div class="p-field p-col-12 p-md-4">
               <span class="p-float-label">
-                <input id="pob" type="text" pInputText formControlName="POB" />
+                <input id="pob" type="text" pInputText maxlength=30 formControlName="POB" />
                 <label for="pob">Place of Birth</label>
               </span>
               <div
@@ -217,7 +226,7 @@
                   !getControl.SSNNumber.errors?.required
                 "
               >
-              ssn number is invalid.
+                ssn number is invalid.
               </small>
             </div>
 
@@ -314,6 +323,7 @@
                   id="Email Id"
                   type="text"
                   formControlName="emailId"
+                  maxlength=30
                   class="form-control"
                   pInputText
                   mask="SA*@SS*.SS||SA*@SS*.SSS"
@@ -387,6 +397,7 @@
                   id="address1"
                   type="text"
                   pInputText
+                  maxlength=30
                   formControlName="address1"
                 />
                 <label for="address1">Address1</label>
@@ -417,6 +428,7 @@
                   id="city"
                   type="text"
                   pInputText
+                  maxlength=30
                   formControlName="city"
                 />
                 <label for="city">City</label>
@@ -500,6 +512,7 @@
                 type="text"
                 pInputText
                 formControlName="address2"
+                maxlength=30
                 placeholder="Address 2"
               />
             </div>
@@ -550,6 +563,7 @@
                 <input
                   id="hobbies"
                   type="text"
+                  maxlength=30
                   pInputText
                   formControlName="hobbies"
                 />
@@ -616,12 +630,14 @@
               <span class="p-float-label">
                 <input
                   id="cFirstName"
+                  maxlength=30
                   type="text"
                   pInputText
                   formControlName="cfirstName"
                 />
                 <label for="cFirstName">First Name</label>
               </span>
+
               <div
                 *ngIf="
                   getControl.cfirstName.touched && getControl.cfirstName.invalid
@@ -632,7 +648,7 @@
                   class="error"
                   *ngIf="getControl.cfirstName.errors?.required"
                 >
-                  Please enter a valid first name.
+                  first name is required.
                 </small>
                 <small
                   class="error"
@@ -640,6 +656,11 @@
                 >
                   Minimum 4 characters are required for first name.
                 </small>
+                <!-- <small class="error"  
+                *ngIf="getControl.cfirstName.errors?.pattern"
+
+                  >only alphabets allowed</small
+                > -->
               </div>
             </div>
             <div class="p-field p-col-12 p-md-4">
@@ -647,6 +668,7 @@
                 <input
                   id="middleName"
                   type="text"
+                  maxlength=30
                   pInputText
                   formControlName="cmiddleName"
                 />
@@ -680,8 +702,8 @@
                 <input
                   id="cLastName"
                   type="text"
-                  value="{{ veteran?.clastName }}"
                   pInputText
+                  maxlength=30
                   formControlName="clastName"
                 />
                 <label for="cLastName">Last Name</label>
@@ -811,6 +833,7 @@
                 <input
                   id="cStreet"
                   type="text"
+                  maxlength=30
                   pInputText
                   formControlName="cStreet"
                 />
@@ -822,7 +845,7 @@
                 <input
                   id="city"
                   type="text"
-                  value="{{ veteran?.cCity }}"
+                  maxlength=30
                   pInputText
                   formControlName="cCity"
                 />
@@ -883,7 +906,7 @@
           class="p-button-outlined"
         ></button>
         <p-button
-          label="RESET"
+          label="CANCLE"
           (click)="resetForm()"
           styleClass="p-button-link"
         ></p-button>
