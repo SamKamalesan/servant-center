@@ -2,8 +2,19 @@
   <div class="p-col-12">
     <app-item-header title="Veteran Profile"></app-item-header>
     <div class="form-container">
-      <form [formGroup]="veteranProfileForm" (ngSubmit)="onSubmit()">
+      <form
+        *ngIf="veteranProfileForm"
+        [formGroup]="veteranProfileForm"
+        (ngSubmit)="onSubmit()"
+      >
         <div class="p-fluid p-formgrid p-grid">
+          <!-- <img
+            src="image"
+            class="title-img"
+            id="img_div"
+            alt="Image"
+            width="150"
+          /> -->
           <img
             id="img_div"
             src="assets/images/profile.svg"
@@ -18,13 +29,24 @@
                 id="Record #"
                 type="text"
                 class="disable"
-                
-                value="{{ veteran.recordNo }}"
                 pInputText
                 formControlName="recordNo"
               />
               <label for="Record #">Record #</label>
             </span>
+            <!-- <div
+                *ngIf="
+                  getControl.recordNo.touched && getControl.recordNo.invalid
+                "
+                class="text-danger"
+              >
+                <small
+                  class="error"
+                  *ngIf="getControl.recordNo.errors?.required"
+                >
+                record no is required.
+                </small>
+              </div> -->
           </div>
           <div class="p-field p-col-12 p-md-4">
             <span class="p-float-label">
@@ -39,6 +61,19 @@
               </p-calendar>
               <label for="Intake DOB"></label>
             </span>
+            <!-- <div
+              *ngIf="
+                getControl.clastName.touched && getControl.clastName.invalid
+              "
+              class="text-danger"
+            >
+              <small
+                class="error"
+                *ngIf="getControl.clastName.errors?.required"
+              >
+                Please click.
+              </small>
+            </div> -->
           </div>
           <div class="p-field p-col-12 p-md-4">
             <span class="p-float-label">
@@ -51,6 +86,19 @@
               />
               <label for="Case Manager">Case Manager</label>
             </span>
+            <!-- <div
+                *ngIf="
+                  getControl.caseManager.touched && getControl.caseManager.invalid
+                "
+                class="text-danger"
+              >
+                <small
+                  class="error"
+                  *ngIf="getControl.caseManager.errors?.required"
+                >
+                Case Manager is required.
+                </small>
+              </div> -->
           </div>
           <div class="p-field p-col-12 p-md-4">
             <span class="p-float-label">
@@ -58,11 +106,26 @@
                 id="Veteran Id"
                 type="text"
                 class="disable"
+                appNoSpecialSymbols
+                customAttr="textOnly"
                 pInputText
                 formControlName="veteranId"
               />
               <label for="Veteran Id">Veteran Id</label>
             </span>
+            <!-- <div
+                *ngIf="
+                  getControl.veteranId.touched && getControl.veteranId.invalid
+                "
+                class="text-danger"
+              >
+                <small
+                  class="error"
+                  *ngIf="getControl.veteranId.errors?.required"
+                >
+                Veteran Id is required.
+                </small>
+              </div> -->
           </div>
         </div>
 
@@ -78,8 +141,10 @@
                   id="First Name"
                   type="text"
                   pInputText
-                  maxlength=30
+                  maxlength="30"
                   pattern="[a-zA-Z]+"
+                  appNoSpecialSymbols
+                  customAttr="textOnly"
                   formControlName="firstName"
                 />
                 <label for="First Name">First Name</label>
@@ -90,20 +155,11 @@
                 "
                 class="text-danger"
               >
-              <!-- <small class="error" [hidden]="!name.hasError('pattern')"
-                  >only alphabets allowed</small
-                > -->
                 <small
                   class="error"
                   *ngIf="getControl.firstName.errors?.required"
                 >
                   first name is required.
-                </small>
-                <small
-                  class="error"
-                  *ngIf="getControl.firstName.errors?.minlength"
-                >
-                  Minimum 3 characters are required for first name.
                 </small>
               </div>
             </div>
@@ -114,12 +170,28 @@
                   type="text"
                   id="Last Name"
                   pInputText
-                  maxlength=30
+                  appNoSpecialSymbols
+                  customAttr="textOnly"
+                  maxlength="30"
                   formControlName="middleName"
                 />
                 <label for="Middle Name">Middle Name</label>
               </span>
+              <div
+                *ngIf="
+                  getControl.middleName.touched && getControl.middleName.invalid
+                "
+                class="text-danger"
+              >
+                <small
+                  class="error"
+                  *ngIf="getControl.middleName.errors?.required"
+                >
+                  middle name is required.
+                </small>
+              </div>
             </div>
+
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
               <span class="p-float-label">
                 <input
@@ -127,7 +199,9 @@
                   id="Last Name"
                   type="text"
                   pInputText
-                  maxlength=30
+                  appNoSpecialSymbols
+                  customAttr="textOnly"
+                  maxlength="30"
                   formControlName="lastName"
                 />
                 <label for="Last Name">Last Name</label>
@@ -144,12 +218,6 @@
                 >
                   Last Name is required.
                 </small>
-                <small
-                  class="error"
-                  *ngIf="getControl.lastName.errors?.minlength"
-                >
-                  Minimum 3 character are required.
-                </small>
               </div>
             </div>
           </div>
@@ -159,27 +227,59 @@
               <span class="p-float-label">
                 <input
                   id="Nick Name"
-                  maxlength=30
+                  maxlength="30"
+                  appNoSpecialSymbols
+                  customAttr="textOnly"
                   type="text"
                   pInputText
                   formControlName="nickName"
                 />
                 <label for="Nick Name">Nick Name</label>
               </span>
+              <div
+                *ngIf="
+                  getControl.nickName.touched && getControl.nickName.invalid
+                "
+                class="text-danger"
+              >
+                <small
+                  class="error"
+                  *ngIf="getControl.nickName.errors?.required"
+                >
+                  Last Name is required.
+                </small>
+              </div>
             </div>
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
-              <p-calendar
-                formControlName="DOB"
-                [maxDate]="maxDateValue"
-                [inline]="false"
-                [showIcon]="true"
-                placeholder="Date Of Birth (mm/dd/yyyy)"
+              <span class="p-float-label">
+                <p-calendar
+                  formControlName="DOB"
+                  [maxDate]="maxDateValue"
+                  [inline]="false"
+                  [showIcon]="true"
+                >
+                </p-calendar>
+                <label for="pob">Date of Birth</label>
+              </span>
+              <div
+                *ngIf="getControl.DOB.touched && getControl.DOB.invalid"
+                class="text-danger"
               >
-              </p-calendar>
+                <small class="error" *ngIf="getControl.DOB.errors?.required">
+                  date of birth is required.
+                </small>
+              </div>
             </div>
+
             <div class="p-field p-col-12 p-md-4">
               <span class="p-float-label">
-                <input id="pob" type="text" pInputText maxlength=30 formControlName="POB" />
+                <input
+                  id="pob"
+                  type="text"
+                  pInputText
+                  maxlength="30"
+                  formControlName="POB"
+                />
                 <label for="pob">Place of Birth</label>
               </span>
               <div
@@ -188,9 +288,6 @@
               >
                 <small class="error" *ngIf="getControl.POB.errors?.required">
                   Please enter a valid place of birth.
-                </small>
-                <small class="error" *ngIf="getControl.POB.errors?.minlength">
-                  Minimum 3 characters are required for place of birth.
                 </small>
               </div>
             </div>
@@ -215,7 +312,7 @@
                   getControl.SSNNumber.errors?.required
                 "
               >
-                ssn number is required.
+                SSN number is required.
               </small>
 
               <small
@@ -226,7 +323,7 @@
                   !getControl.SSNNumber.errors?.required
                 "
               >
-                ssn number is invalid.
+                ssn number is invalid minimum 8 digits required.
               </small>
             </div>
 
@@ -248,7 +345,7 @@
                   getControl.hmisIdNo.errors?.required
                 "
               >
-                hmis id is required.
+                HMIS ID is required.
               </small>
 
               <small
@@ -266,15 +363,29 @@
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
               <span class="p-float-label">
                 <p-dropdown
-                  inputId="gender"
+                  inputId="select gender"
                   [autoDisplayFirst]="false"
                   [options]="genders"
                   formControlName="selectedGenders"
                   optionLabel="name"
                 >
                 </p-dropdown>
-                <label for="gender">Select Gender</label>
+                <label for="select gender">Select Gender</label>
               </span>
+              <div
+                *ngIf="
+                  getControl.selectedGenders.touched &&
+                  getControl.selectedGenders.invalid
+                "
+                class="text-danger"
+              >
+                <small
+                  class="error"
+                  *ngIf="getControl.selectedGenders.errors?.required"
+                >
+                  select an option.
+                </small>
+              </div>
             </div>
             <ng-template pTemplate="selectedItem">
               <div
@@ -285,6 +396,7 @@
               </div>
             </ng-template>
           </div>
+
           <div class="p-fluid p-grid">
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
               <span class="p-float-label">
@@ -298,6 +410,20 @@
                 </p-dropdown>
                 <label for="maritalStatus">Select Marital Status</label>
               </span>
+              <div
+                *ngIf="
+                  getControl.selectedMaritalStatus.touched &&
+                  getControl.selectedMaritalStatus.invalid
+                "
+                class="text-danger"
+              >
+                <small
+                  class="error"
+                  *ngIf="getControl.selectedMaritalStatus.errors?.required"
+                >
+                  select an option.
+                </small>
+              </div>
             </div>
             <ng-template pTemplate="selectedItem">
               <div
@@ -323,10 +449,12 @@
                   id="Email Id"
                   type="text"
                   formControlName="emailId"
-                  maxlength=30
+                  maxlength="30"
                   class="form-control"
                   pInputText
-                  mask="SA*@SS*.SS||SA*@SS*.SSS"
+                  appNoSpecialSymbols
+                  customAttr="email"
+                  
                 />
                 <label for="Email Id">Email Id</label>
               </span>
@@ -342,7 +470,7 @@
                 </small>
                 <small
                   class="error"
-                  *ngIf="getControl.emailId.errors?.required"
+                  *ngIf="getControl.emailId.errors?.pattern && getControl.emailId.invalid"
                 >
                   Email seems invalid.
                 </small>
@@ -395,9 +523,11 @@
               <span class="p-float-label">
                 <input
                   id="address1"
+                  appNoSpecialSymbols
+                  customAttr="textOnly"
                   type="text"
                   pInputText
-                  maxlength=30
+                  maxlength="30"
                   formControlName="address1"
                 />
                 <label for="address1">Address1</label>
@@ -414,12 +544,6 @@
                 >
                   Address 1 is required.
                 </small>
-                <small
-                  class="error"
-                  *ngIf="getControl.address1.errors?.minlength"
-                >
-                  Minimum 4 character are required.
-                </small>
               </div>
             </div>
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
@@ -428,7 +552,9 @@
                   id="city"
                   type="text"
                   pInputText
-                  maxlength=30
+                  appNoSpecialSymbols
+                  customAttr="textOnly"
+                  maxlength="30"
                   formControlName="city"
                 />
                 <label for="city">City</label>
@@ -440,24 +566,8 @@
                 <small class="error" *ngIf="getControl.city.errors?.required">
                   city is required.
                 </small>
-                <small class="error" *ngIf="getControl.city.errors?.minlength">
-                  Minimum 4 character are required.
-                </small>
               </div>
             </div>
-
-            <!-- <div class="p-field p-col-12 p-md-4">
-              <span class="p-float-label">
-                <p-dropdown
-                  inputId="dropdown"
-                  [autoDisplayFirst]="false"
-                  [options]="cities"
-                  [(ngModel)]="value8"
-                  optionLabel="name"
-                ></p-dropdown>
-                <label for="dropdown">Dropdown</label>
-              </span>
-            </div> -->
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
               <span class="p-float-label">
                 <p-dropdown
@@ -470,7 +580,22 @@
                 </p-dropdown>
                 <label for="Select State">Select State</label>
               </span>
+              <div
+                *ngIf="
+                  getControl.selectedState.touched &&
+                  getControl.selectedState.invalid
+                "
+                class="text-danger"
+              >
+                <small
+                  class="error"
+                  *ngIf="getControl.selectedState.errors?.required"
+                >
+                  select an option.
+                </small>
+              </div>
             </div>
+
             <ng-template pTemplate="selectedItem">
               <div
                 class="country-item country-item-value"
@@ -479,42 +604,57 @@
                 <div>{{ selectedState.name }}</div>
               </div>
             </ng-template>
+          </div>
 
+          <div class="p-fluid p-grid">
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
-              <input
-                type="text"
-                pInputText
-                formControlName="country"
-                placeholder="Country"
-              />
-              <!-- <div
+              <span class="p-float-label">
+                <input
+                  type="text"
+                  appNoSpecialSymbols
+                  customAttr="textOnly"
+                  pInputText
+                  formControlName="country"
+                />
+                <label for="country">Country</label>
+              </span>
+              <div
+                *ngIf="getControl.country.touched && getControl.country.invalid"
+                class="text-danger"
+              >
+                <small
+                  class="error"
+                  *ngIf="getControl.country.errors?.required"
+                >
+                  country is required.
+                </small>
+              </div>
+            </div>
+            <div id="fields_margin" class="p-field p-col-12 p-md-4">
+              <span class="p-float-label">
+                <input
+                  type="text"
+                  pInputText
+                  appNoSpecialSymbols
+                  customAttr="textOnly"
+                  formControlName="address2"
+                  maxlength="30"
+                />
+                <label for="address2">Address 2</label>
+              </span>
+              <div
                 *ngIf="
-                  getControl.country.touched && getControl.lastName.invalid
+                  getControl.address2.touched && getControl.address2.invalid
                 "
                 class="text-danger"
               >
                 <small
-                  class="validations"
-                  *ngIf="getControl.country.errors?.required"
+                  class="error"
+                  *ngIf="getControl.address2.errors?.required"
                 >
-                  country is required.
-            </small>
-                <small
-                  class="validations"
-                  *ngIf="getControl.country.errors?.minlength"
-                >
-                  Minimum 4 character are required.
-          </small>
-              </div> -->
-            </div>
-            <div id="fields_margin" class="p-field p-col-12 p-md-4">
-              <input
-                type="text"
-                pInputText
-                formControlName="address2"
-                maxlength=30
-                placeholder="Address 2"
-              />
+                  address 2 is required.
+                </small>
+              </div>
             </div>
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
               <span class="p-float-label">
@@ -563,7 +703,9 @@
                 <input
                   id="hobbies"
                   type="text"
-                  maxlength=30
+                  appNoSpecialSymbols
+                  customAttr="textOnly"
+                  maxlength="30"
                   pInputText
                   formControlName="hobbies"
                 />
@@ -583,6 +725,20 @@
                 </p-dropdown>
                 <label for="primaryLanguage">Primary Language</label>
               </span>
+              <div
+                *ngIf="
+                  getControl.selectedprimaryLanguage.touched &&
+                  getControl.selectedprimaryLanguage.invalid
+                "
+                class="text-danger"
+              >
+                <small
+                  class="error"
+                  *ngIf="getControl.selectedprimaryLanguage.errors?.required"
+                >
+                  select an option.
+                </small>
+              </div>
             </div>
 
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
@@ -599,10 +755,22 @@
                   >Relegious Preference</label
                 >
               </span>
+              <div
+                *ngIf="
+                  getControl.selectedRelegion.touched &&
+                  getControl.selectedRelegion.invalid
+                "
+                class="text-danger"
+              >
+                <small
+                  class="error"
+                  *ngIf="getControl.selectedRelegion.errors?.required"
+                >
+                  select an option.
+                </small>
+              </div>
             </div>
-          </div>
 
-          <div class="p-fluid p-grid">
             <div id="fields_margin" class="p-field p-col-12 p-md-4">
               <span class="p-float-label">
                 <p-dropdown
@@ -613,9 +781,14 @@
                   optionLabel="name"
                 >
                 </p-dropdown>
-                <label for="race">Race</label>
+                <label for="race">Select Race</label>
               </span>
             </div>
+            <ng-template pTemplate="selectedItem">
+              <div class="country-item country-item-value" *ngIf="selectedRace">
+                <div>{{ selectedRace.name }}</div>
+              </div>
+            </ng-template>
           </div>
         </fieldset>
         <!-- Other Info End -->
@@ -630,7 +803,11 @@
               <span class="p-float-label">
                 <input
                   id="cFirstName"
-                  maxlength=30
+                  maxlength="30"
+                  appNoSpecialSymbols
+                  appNoSpecialSymbols
+                  customAttr="textOnly"
+                  customAttr="textOnly"
                   type="text"
                   pInputText
                   formControlName="cfirstName"
@@ -650,25 +827,15 @@
                 >
                   first name is required.
                 </small>
-                <small
-                  class="error"
-                  *ngIf="getControl.cfirstName.errors?.minlength"
-                >
-                  Minimum 4 characters are required for first name.
-                </small>
-                <!-- <small class="error"  
-                *ngIf="getControl.cfirstName.errors?.pattern"
-
-                  >only alphabets allowed</small
-                > -->
               </div>
             </div>
             <div class="p-field p-col-12 p-md-4">
               <span class="p-float-label">
                 <input
                   id="middleName"
+                  appNoSpecialSymbols
+                  customAttr="textOnly"
                   type="text"
-                  maxlength=30
                   pInputText
                   formControlName="cmiddleName"
                 />
@@ -688,12 +855,6 @@
                 >
                   Please enter a valid middle name.
                 </small>
-                <small
-                  class="error"
-                  *ngIf="getControl.cmiddleName.errors?.minlength"
-                >
-                  Minimum 4 characters are required for first name.
-                </small>
               </div>
             </div>
 
@@ -702,8 +863,11 @@
                 <input
                   id="cLastName"
                   type="text"
+                  appNoSpecialSymbols
+                  customAttr="textOnly"
+                  appNoSpecialSymbols
+                  customAttr="textOnly"
                   pInputText
-                  maxlength=30
                   formControlName="clastName"
                 />
                 <label for="cLastName">Last Name</label>
@@ -720,12 +884,6 @@
                 >
                   Please enter a valid last name.
                 </small>
-                <small
-                  class="error"
-                  *ngIf="getControl.clastName.errors?.minlength"
-                >
-                  Minimum 4 characters are required for last name.
-                </small>
               </div>
             </div>
 
@@ -735,6 +893,7 @@
                   inputId="relationship"
                   [autoDisplayFirst]="false"
                   [options]="relations"
+                  optionLable="name"
                   formControlName="selectedRelationship"
                   optionLabel="name"
                 >
@@ -743,6 +902,20 @@
                   >Select Contact Person Relationship</label
                 >
               </span>
+              <div
+                *ngIf="
+                  getControl.selectedRelationship.touched &&
+                  getControl.selectedRelationship.invalid
+                "
+                class="text-danger"
+              >
+                <small
+                  class="error"
+                  *ngIf="getControl.selectedRelationship.errors?.required"
+                >
+                  select an option.
+                </small>
+              </div>
 
               <ng-template pTemplate="selectedItem">
                 <div
@@ -789,12 +962,6 @@
                 >
                   Please enter a valid house number.
                 </small>
-                <small
-                  class="error"
-                  *ngIf="getControl.cHouseNumber.errors?.minlength"
-                >
-                  Minimum 4 character are required.
-                </small>
               </div>
             </div>
             <div class="p-field p-col-12 p-md-4">
@@ -833,35 +1000,70 @@
                 <input
                   id="cStreet"
                   type="text"
-                  maxlength=30
                   pInputText
+                  appNoSpecialSymbols
+                  customAttr="textOnly"
                   formControlName="cStreet"
                 />
                 <label for="cStreet">Street</label>
               </span>
+              <small
+                class="error"
+                *ngIf="
+                  getControl.cStreet.touched &&
+                  getControl.cStreet.errors?.required
+                "
+              >
+                street is required.
+              </small>
             </div>
+
             <div class="p-field p-col-12 p-md-4">
               <span class="p-float-label">
                 <input
                   id="city"
                   type="text"
-                  maxlength=30
+                  value="{{ veteran?.cCity }}"
                   pInputText
                   formControlName="cCity"
                 />
                 <label for="city">City</label>
               </span>
+              <small
+                class="error"
+                *ngIf="
+                  getControl.cCity.touched && getControl.cCity.errors?.required
+                "
+              >
+                city is required.
+              </small>
             </div>
             <div class="p-field p-col-12 p-md-4">
               <span class="p-float-label">
                 <input
                   id="cState"
                   type="text"
+                  appNoSpecialSymbols
+                  customAttr="textOnly"
                   pInputText
                   formControlName="cState"
                 />
                 <label for="cState">State</label>
               </span>
+              <div
+                *ngIf="getControl.cState.touched && getControl.cState.invalid"
+                class="text-danger"
+              >
+                <small class="error" *ngIf="getControl.cState.errors?.required">
+                  state is required.
+                </small>
+                <small
+                  class="error"
+                  *ngIf="getControl.cState.errors?.minlength"
+                >
+                  Minimum 3 character are required for state.
+                </small>
+              </div>
             </div>
             <div class="p-field p-col-12 p-md-4">
               <span class="p-float-label">
@@ -899,17 +1101,20 @@
         <!-- Contact Person's Address End -->
 
         <button
-          [disabled]="veteranProfileForm.invalid"
-          type="update"
+          type="submit"
           pButton
-          label="SUBMIT"
+          [disabled]="veteranProfileForm.invalid"
+          label="Submit"
           class="p-button-outlined"
         ></button>
-        <p-button
-          label="CANCLE"
+        &nbsp; &nbsp;
+        <button
+          type="button"
           (click)="resetForm()"
-          styleClass="p-button-link"
-        ></p-button>
+          pButton
+          label="Cancel"
+          class="p-button-outlined"
+        ></button>
       </form>
     </div>
   </div>
