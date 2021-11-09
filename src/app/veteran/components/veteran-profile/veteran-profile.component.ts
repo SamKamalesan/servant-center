@@ -201,7 +201,6 @@ export class VeteranProfileComponent implements OnInit {
         this.cfirstName,
         [Validators.required],
       ],
-      
       cmiddleName: [
         this.contactPersonMiddleName,
         [Validators.required,
