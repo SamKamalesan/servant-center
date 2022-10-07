@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { progressNoteResponse } from 'src/app/shared/models/progressNotes_model';
 import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
 import { goalTypes } from '../../../app.constants';
@@ -37,7 +37,7 @@ export class ProgressNotesComponent implements OnInit {
   public goalId!: number;
   selectedType!: any;
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private service: ProgressNotesService,
     private cacheData: ClipBoardService,
     private messageService: MessageService,

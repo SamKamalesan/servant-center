@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-transportation-request-form',
@@ -8,9 +8,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class TransportationRequestFormComponent implements OnInit {
   formTitle = 'TRANSPORTATION REQUEST FORM';
-  transportRequestForm!: FormGroup;
+  transportRequestForm!: UntypedFormGroup;
   states: any[] = [];
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: UntypedFormBuilder) {}
 
   ngOnInit(): void {
     this.buildForm();

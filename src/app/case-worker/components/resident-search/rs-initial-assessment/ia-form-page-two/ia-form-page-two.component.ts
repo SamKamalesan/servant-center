@@ -1,6 +1,6 @@
 import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IaPage2Service } from 'src/app/case-worker/services/ia-page2.service';
 import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
@@ -19,9 +19,9 @@ export class IaFormPageTwoComponent implements OnInit {
   data: any;
   serviceDates: any;
   selectedVetId!: number;
-  page2Form!: FormGroup;
-  educationAndEmploymentHistory!: FormGroup;
-  mentalHealthInformation!: FormGroup;
+  page2Form!: UntypedFormGroup;
+  educationAndEmploymentHistory!: UntypedFormGroup;
+  mentalHealthInformation!: UntypedFormGroup;
   military = [
     { label: 'Yes', value: true },
     { label: 'No', value: false },
@@ -32,7 +32,7 @@ export class IaFormPageTwoComponent implements OnInit {
   ];
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private router: Router,
     private service: IaPage2Service,
     private messageService: MessageService,

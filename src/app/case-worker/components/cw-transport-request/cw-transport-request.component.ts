@@ -8,9 +8,9 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import {
-  FormBuilder,
+  UntypedFormBuilder,
   FormControl,
-  FormGroup,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { TransportService } from '../../services/transport.service';
@@ -57,7 +57,7 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
   public greyingOut: boolean= false;
 
   constructor(
-    private formbuilder: FormBuilder,
+    private formbuilder: UntypedFormBuilder,
     private service: TransportService,
     private datePipe: DatePipe,
     private router: Router,
@@ -68,7 +68,7 @@ export class CwTransportRequestComponent implements OnInit, OnChanges {
     this.maxDateValue = new Date(new Date().getTime());
   }
   
-  transportRequestForm!: FormGroup;
+  transportRequestForm!: UntypedFormGroup;
 
   @HostListener('window:resize')
   onWindowResize() {

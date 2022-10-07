@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IaPage1Service } from 'src/app/case-worker/services/ia-page1.service';
 import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
@@ -21,11 +21,11 @@ export class IaFormPageOneComponent implements OnInit {
   hivTestDate: any;
   stdTestDate: any;
   submitted: boolean = false;
-  page1Form!: FormGroup;
-  personalDetails!: FormGroup;
-  incomeAndResources!: FormGroup;
-  benefits!: FormGroup;
-  socialAndFamilyHistory!: FormGroup;
+  page1Form!: UntypedFormGroup;
+  personalDetails!: UntypedFormGroup;
+  incomeAndResources!: UntypedFormGroup;
+  benefits!: UntypedFormGroup;
+  socialAndFamilyHistory!: UntypedFormGroup;
   everMarried = [
     { label: 'Yes', value: true },
     { label: 'No', value: false },
@@ -90,7 +90,7 @@ export class IaFormPageOneComponent implements OnInit {
     { label: 'Other', value: 'Other' },
   ];
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private router: Router,
     private service: IaPage1Service,
     private messageService: MessageService,
@@ -348,11 +348,11 @@ export class IaFormPageOneComponent implements OnInit {
       motherStatus: ['', Validators.required],
       fathersFullName: ['', Validators.required],
       fatherStatus: ['', Validators.required],
-      siblings: new FormArray([]),
+      siblings: new UntypedFormArray([]),
       everMarried: ['', Validators.required],
       numberOfMarriages: ['', Validators.required],
       spouseOrSignificantOther: ['', Validators.required],
-      children: new FormArray([]),
+      children: new UntypedFormArray([]),
       childhood: ['', Validators.required],
       relationShipWithParents: ['', Validators.required],
       relationShipWithSiblings: ['', Validators.required],
@@ -472,7 +472,7 @@ export class IaFormPageOneComponent implements OnInit {
     return this.page1Form.get([
       'socialAndFamilyHistory',
       'siblings',
-    ]) as FormArray;
+    ]) as UntypedFormArray;
   }
 
   addChildren() {
@@ -489,7 +489,7 @@ export class IaFormPageOneComponent implements OnInit {
     return this.page1Form.get([
       'socialAndFamilyHistory',
       'children',
-    ]) as FormArray;
+    ]) as UntypedFormArray;
   }
   successMessage() {
     this.messageService.add({

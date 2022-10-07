@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IaPage4Service } from 'src/app/case-worker/services/ia-page4.service';
 import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
@@ -15,10 +15,10 @@ export class IaFormPageFourComponent implements OnInit {
   public greyingOut: boolean= true;
   submitted!: boolean;
   selecteVetId!: number;
-  page4Form!: FormGroup;
+  page4Form!: UntypedFormGroup;
   data: any;
-  substanceAbuseHistory!: FormGroup;
-  legalHistoryOrIssues!: FormGroup;
+  substanceAbuseHistory!: UntypedFormGroup;
+  legalHistoryOrIssues!: UntypedFormGroup;
   currentlyConsumesAlcohol = [
     { label: 'Yes', value: true },
     { label: 'No', value: false },
@@ -61,7 +61,7 @@ export class IaFormPageFourComponent implements OnInit {
   ];
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private router: Router,
     private messageService: MessageService,
     private service: IaPage4Service,

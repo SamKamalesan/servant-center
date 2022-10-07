@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { TransportService } from '../../services/transport.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class MessagesComponent implements OnInit {
   public isShowSpinner:boolean=false;
   public greyingOut: boolean= false;
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private service: TransportService
   ) {
     this.service.getTransportRequestFormData().subscribe((data) => {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
 import { HealthTrackerService } from '../../services/health-tracker.service';
 import { MessageService } from 'primeng/api';
@@ -19,7 +19,7 @@ export class HealthTrackerComponent implements OnInit {
   showBreathalyzer: boolean = false;
   showBloodSugar: boolean = false;
   showOther: boolean = false;
-  healthTrackerForm!: FormGroup;
+  healthTrackerForm!: UntypedFormGroup;
   healthTrackerDetails: any;
   healthTrackerFormDetails: any;
   isFormFilled: boolean = false;
@@ -38,7 +38,7 @@ export class HealthTrackerComponent implements OnInit {
   isShowTable: boolean =false;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private service: HealthTrackerService,
     private cacheData: ClipBoardService,
     private messageService: MessageService

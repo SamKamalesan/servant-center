@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { FormBuilder, FormGroup, Validators,FormControl } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators,FormControl } from '@angular/forms';
 import { VeteranprofileService } from '../../../services/veteranprofile.service';
 import { states, destinationAddresses } from '../../../app.constants';
 import { VeteranProfileResponse } from 'src/app/shared/models/VeteranProfileResponse';
@@ -21,7 +21,7 @@ interface DropDown {
 export class TransportationRequestFormComponent implements OnInit {
   formTitle = 'TRANSPORTATION REQUEST FORM';
 
-  transportRequestForm!: FormGroup;
+  transportRequestForm!: UntypedFormGroup;
   submitted = false;
   public state: any;
   public minDateValue: any;
@@ -46,7 +46,7 @@ export class TransportationRequestFormComponent implements OnInit {
   
   constructor(
     private cacheData: ClipBoardService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private service: VeteranprofileService,
     private messageService: MessageService
 

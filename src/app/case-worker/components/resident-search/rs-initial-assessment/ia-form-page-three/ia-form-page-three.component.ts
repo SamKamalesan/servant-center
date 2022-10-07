@@ -1,9 +1,9 @@
 import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import {
   FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -18,15 +18,15 @@ import { DatePipe } from '@angular/common';
   providers: [MessageService],
 })
 export class IaFormPageThreeComponent implements OnInit {
-  page3Form!: FormGroup;
+  page3Form!: UntypedFormGroup;
   ia3: boolean = true;
   greyingOut: boolean = true;
   data: any;
   submitted!: boolean;
   selecteVetId: any;
-  mentalStatusAssessment!: FormGroup;
-  medicalInformation!: FormGroup;
-  ideation!: FormGroup;
+  mentalStatusAssessment!: UntypedFormGroup;
+  medicalInformation!: UntypedFormGroup;
+  ideation!: UntypedFormGroup;
   orientationDate: any;
   generalAppearanceList: any = [
     { label: 'Well Groomed', value: 'well groomed' },
@@ -99,7 +99,7 @@ export class IaFormPageThreeComponent implements OnInit {
     { label: 'No', value: false },
   ];
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private router: Router,
     private messageService: MessageService,
     private service: IaPage3Service,
@@ -382,7 +382,7 @@ export class IaFormPageThreeComponent implements OnInit {
       'mentalStatusAssessment',
       'mood',
       'answeredByClient',
-    ]) as FormControl;
+    ]) as UntypedFormControl;
   }
 
   get moodObservedByInterviewer() {
@@ -390,7 +390,7 @@ export class IaFormPageThreeComponent implements OnInit {
       'mentalStatusAssessment',
       'mood',
       'observedByInterviewer',
-    ]) as FormControl;
+    ]) as UntypedFormControl;
   }
 
   successMessage() {

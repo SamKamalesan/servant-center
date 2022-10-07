@@ -1,6 +1,6 @@
 import { DatePipe, ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { DataService } from 'src/app/case-worker/services/data.service';
 import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
@@ -11,8 +11,8 @@ import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
   providers: [MessageService],
 })
 export class RsTreatmentPlanComponent implements OnInit {
-  public treatmentPlanForm!: FormGroup;
-  public treatmentIssuesForm!: FormGroup;
+  public treatmentPlanForm!: UntypedFormGroup;
+  public treatmentIssuesForm!: UntypedFormGroup;
   public treatmentGoals: any;
   public issuesArray: any = [];
   public delete: boolean = true;
@@ -42,7 +42,7 @@ export class RsTreatmentPlanComponent implements OnInit {
   
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private service: DataService,
     private cacheData:ClipBoardService,
     private messageService: MessageService,
@@ -296,7 +296,7 @@ export class RsTreatmentPlanComponent implements OnInit {
     return tempArray;
   }
 
-  getIssues(): FormGroup {
+  getIssues(): UntypedFormGroup {
     return this.formBuilder.group({
       goals: ['', Validators.required],
       plans: ['', Validators.required],
@@ -306,33 +306,33 @@ export class RsTreatmentPlanComponent implements OnInit {
     });
   }
 
-  get physicalHealth(): FormArray {
-    return this.treatmentIssuesForm.get('physicalHealth') as FormArray;
+  get physicalHealth(): UntypedFormArray {
+    return this.treatmentIssuesForm.get('physicalHealth') as UntypedFormArray;
   }
-  get substanceUse(): FormArray {
-    return this.treatmentIssuesForm.get('substanceUse') as FormArray;
+  get substanceUse(): UntypedFormArray {
+    return this.treatmentIssuesForm.get('substanceUse') as UntypedFormArray;
   }
 
-  get mentalHealth(): FormArray {
-    return this.treatmentIssuesForm.get('mentalHealth') as FormArray;
+  get mentalHealth(): UntypedFormArray {
+    return this.treatmentIssuesForm.get('mentalHealth') as UntypedFormArray;
   }
-  get housing(): FormArray {
-    return this.treatmentIssuesForm.get('housing') as FormArray;
+  get housing(): UntypedFormArray {
+    return this.treatmentIssuesForm.get('housing') as UntypedFormArray;
   }
-  get incomeLegal(): FormArray {
-    return this.treatmentIssuesForm.get('incomeLegal') as FormArray;
+  get incomeLegal(): UntypedFormArray {
+    return this.treatmentIssuesForm.get('incomeLegal') as UntypedFormArray;
   }
-  get relationships(): FormArray {
-    return this.treatmentIssuesForm.get('relationships') as FormArray;
+  get relationships(): UntypedFormArray {
+    return this.treatmentIssuesForm.get('relationships') as UntypedFormArray;
   }
-  get education(): FormArray {
-    return this.treatmentIssuesForm.get('education') as FormArray;
+  get education(): UntypedFormArray {
+    return this.treatmentIssuesForm.get('education') as UntypedFormArray;
   }
-  get benefits(): FormArray {
-    return this.treatmentIssuesForm.get('benefits') as FormArray;
+  get benefits(): UntypedFormArray {
+    return this.treatmentIssuesForm.get('benefits') as UntypedFormArray;
   }
-  get treatmentIssues(): FormArray {
-    return this.treatmentPlanForm.get('treatmentIssues') as FormArray;
+  get treatmentIssues(): UntypedFormArray {
+    return this.treatmentPlanForm.get('treatmentIssues') as UntypedFormArray;
   }
 
   addNewField() {

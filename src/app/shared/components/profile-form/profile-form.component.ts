@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { VeteranprofileService } from 'src/app/veteran/services/veteranprofile.service';
 import { MessageService } from 'primeng/api';
 
@@ -25,7 +25,7 @@ interface DropDown {
 })
 export class ProfileFormComponent implements OnInit {
   public profileDetails: any;
-  public profileForm!: FormGroup;
+  public profileForm!: UntypedFormGroup;
   public veteran: any;
   public states!: DropDown[];
   public maritalStatus!: DropDown[];
@@ -45,7 +45,7 @@ export class ProfileFormComponent implements OnInit {
   showOverlay: boolean = true;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private service: VeteranprofileService,
     private cacheData: ClipBoardService,
     private messageService: MessageService,

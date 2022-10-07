@@ -1,5 +1,5 @@
 import { Component, isDevMode, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { CalendarOptions } from '@fullcalendar/angular';
 import { MessageService } from 'primeng/api';
@@ -19,7 +19,7 @@ export class CaseWorkerDashboardComponent implements OnInit {
   public eventList: any = [];
   public totalEvents: any = [];
   public tagName = 'Appointment';
-  public eventsForm!: FormGroup;
+  public eventsForm!: UntypedFormGroup;
   public displayEvent = false;
   public eventInfo: any = [];
   public minDateValue: any;
@@ -43,7 +43,7 @@ export class CaseWorkerDashboardComponent implements OnInit {
 
   constructor(
     private service: CalendarEventsService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private cache: ClipBoardService,
     private messageService: MessageService
   ) {}
@@ -103,7 +103,7 @@ export class CaseWorkerDashboardComponent implements OnInit {
       eventDescription: ['', Validators.required],
       startTime: ['', Validators.required],
       endTime: ['', Validators.required],
-      participants: new FormArray([]),
+      participants: new UntypedFormArray([]),
     });
   }
 
@@ -145,7 +145,7 @@ export class CaseWorkerDashboardComponent implements OnInit {
   }
 
   get participants() {
-    return this.eventsForm.get(['participants']) as FormArray;
+    return this.eventsForm.get(['participants']) as UntypedFormArray;
   }
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
@@ -239,7 +239,7 @@ export class CaseWorkerDashboardComponent implements OnInit {
       }
     });
     this.eventsForm.reset();
-    let participantsArray = this.eventsForm.get(['participants']) as FormArray;
+    let participantsArray = this.eventsForm.get(['participants']) as UntypedFormArray;
     this.clearFormArray(participantsArray);
     if (this.showAppointmentDialog) {
       this.displayAppointment = false;
@@ -250,7 +250,7 @@ export class CaseWorkerDashboardComponent implements OnInit {
   onCancel() {
     this.count = 0;
     this.eventsForm.reset();
-    let participantsArray = this.eventsForm.get(['participants']) as FormArray;
+    let participantsArray = this.eventsForm.get(['participants']) as UntypedFormArray;
     this.clearFormArray(participantsArray);
     if (this.showAppointmentDialog) {
       this.displayAppointment = false;
@@ -270,7 +270,7 @@ export class CaseWorkerDashboardComponent implements OnInit {
       this.showAppointmentDialog = false;
     }
   }
-  clearFormArray = (formArray: FormArray) => {
+  clearFormArray = (formArray: UntypedFormArray) => {
     while (formArray.length !== 0) {
       formArray.removeAt(0);
     }
@@ -279,7 +279,7 @@ export class CaseWorkerDashboardComponent implements OnInit {
   crossButton() {
     this.count = 0;
     this.eventsForm.reset();
-    let participantsArray = this.eventsForm.get(['participants']) as FormArray;
+    let participantsArray = this.eventsForm.get(['participants']) as UntypedFormArray;
     this.clearFormArray(participantsArray);
   }
   showEventDetail(arg: any) {

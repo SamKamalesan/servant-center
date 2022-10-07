@@ -2,7 +2,7 @@ import { Component, isDevMode, OnInit } from '@angular/core';
 
 import { CalendarOptions } from '@fullcalendar/angular';
 
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ProgressNotesService } from '../../services/progress-notes.service';
 import { CalendarResp } from 'src/app/shared/models/calendarEventsResponse';
 import { CalendarServiceService } from '../../services/calendar-service.service';
@@ -15,7 +15,7 @@ import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
 export class DashboardComponent implements OnInit {
   public eventList: any = [];
   public displayEvent = false;
-  public eventsForm!: FormGroup;
+  public eventsForm!: UntypedFormGroup;
   public eventInfo: any = [];
   public calendarData: any = [];
   public veteranId: any;

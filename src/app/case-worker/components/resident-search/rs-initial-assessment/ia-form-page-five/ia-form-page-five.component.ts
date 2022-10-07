@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IaPage5Service } from "src/app/case-worker/services/ia-page5.service";
 import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
@@ -10,15 +10,15 @@ import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
   styleUrls: ['./ia-form-page-five.component.scss'],
 })
 export class IaFormPageFiveComponent implements OnInit {
-  page5Form!: FormGroup;
-  preliminaryTreatmentGoals!: FormGroup;
+  page5Form!: UntypedFormGroup;
+  preliminaryTreatmentGoals!: UntypedFormGroup;
   progressNote: any;
   selectedVetId!: number;
   shortTerm:any;
   data: any;
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
      private router: Router,
       private service: IaPage5Service,
       private cacheData: ClipBoardService

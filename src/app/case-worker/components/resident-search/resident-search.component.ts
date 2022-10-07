@@ -6,7 +6,7 @@ import {
   OnInit,
   Output
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { ClipBoardService } from 'src/app/shared/services/clip-board.service';
@@ -28,7 +28,7 @@ export class ResidentSearchComponent implements OnInit {
   public selectedResident: any;
   public tableValues: any;
   public allValues: any;
-  public residentSearchForm!: FormGroup;
+  public residentSearchForm!: UntypedFormGroup;
   public result: any;
   public maxDateValue: any;
   public data:any;
@@ -44,7 +44,7 @@ export class ResidentSearchComponent implements OnInit {
   public grayOut: boolean=true;
   public isVeteranFound: boolean = false;
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private service: ResidentSearchService,
     @Inject(DOCUMENT) private _document: Document,
     private router: Router,
