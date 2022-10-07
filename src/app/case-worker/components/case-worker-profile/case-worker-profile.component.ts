@@ -9,7 +9,7 @@ import { VeteranDashboardService } from 'src/app/veteran/services/veteran-dashbo
   templateUrl: './case-worker-profile.component.html',
   styleUrls: ['./case-worker-profile.component.scss'],
 })
-export class CaseWorkerProfileComponent {
+export class CaseWorkerProfileComponent implements OnInit {
   public caseWorker: any;
   public userInfo: any;
   username!: string;
